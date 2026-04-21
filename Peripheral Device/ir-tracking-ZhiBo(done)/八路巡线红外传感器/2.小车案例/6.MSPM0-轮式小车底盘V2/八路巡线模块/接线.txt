@@ -1,0 +1,11 @@
+八路巡线模块	MSPM0
+VCC		5V
+GND		GND
+SDA		PA16
+SCL		PA15
+
+四路电机驱动板	MSPM0
+5V		5V
+GND		GND
+TX2		PB7
+RX2		PB6

@@ -1,0 +1,3 @@
+bsp_usart.c:20:1:__io_putchar	16	static
+bsp_usart.c:28:6:Bsp_UART1_Init	8	static
+bsp_usart.c:35:6:HAL_UART_RxCpltCallback	16	static

@@ -1,0 +1,8 @@
+环境搭建教程:
+https://wiki.lckfb.com/zh-hans/dmx/beginner/install.html
+
+环境搭建好后
+需要把该工程放进环境里面编译运行!
+
+
+运行按住复位键，等待红外稳定，在松开复位开始巡线

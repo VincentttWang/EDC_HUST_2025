@@ -1,0 +1,39 @@
+stm32的
+
+L1(上层)
+PA11  AIN1
+PA8   AIN2
+编码器
+PA0  E1A
+PA1  E1B
+
+L2 (下层)
+PB0 AIN1
+PB1 AIN2
+编码器
+PA6 E1B
+PA7 E1A
+
+
+R1(上层)
+PC6  BIN1
+PC7  BIN2
+编码器
+PA15  E2A
+PB3  E2B
+
+
+R2  (下层)
+PC8  BIN1
+PC9  BIN2
+编码器
+PB6 E2B
+PB7 E2A
+
+
+串口通信（红外）
+pc10 -> rX
+pc11 -> tX
+
+
+

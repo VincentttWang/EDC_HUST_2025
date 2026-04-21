@@ -1,0 +1,16 @@
+\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\temp\MiniIMU.exe,\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\MiniIMU.exe
+\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\temp\playPic\61C.jpg,\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\playPic\61C.jpg
+\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\temp\playPic\JY61.jpg,\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\playPic\JY61.jpg
+\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\temp\playPic\931.jpg,\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\playPic\931.jpg
+\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\temp\playPic\906.jpg,\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\playPic\906.jpg
+\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\temp\zh-CN\MiniIMU.resources.dll,\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\zh-CN\MiniIMU.resources.dll
+\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\temp\zh-Hans\MiniIMU.resources.dll,\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\zh-Hans\MiniIMU.resources.dll
+\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\temp\zh\MiniIMU.resources.dll,\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\zh\MiniIMU.resources.dll
+\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\temp\SerialPortProtocol.dll,\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\SerialPortProtocol.dll
+\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\temp\DataTypeEnum.dll,\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\DataTypeEnum.dll
+\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\temp\SensorAgreement.dll,\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\SensorAgreement.dll
+\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\temp\FirmwareUpdate.dll,\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\FirmwareUpdate.dll
+\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\temp\UChartInfo.dll,\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\UChartInfo.dll
+\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\temp\uChartView.dll,\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\uChartView.dll
+\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\temp\xml\ProductModel.xml,\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\xml\ProductModel.xml
+\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\temp\AD\901lte.jpg,\\Yxdz\yxdz\产品文件-资料\74000-74999\74497\资料\JY61P\JY61P\JY61P\上位机\AD\901lte.jpg

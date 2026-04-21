@@ -1,0 +1,42 @@
+此案例使用的电机驱动是AT8236芯片
+
+1个电机的接法
+L1: PA12(AIN2） 、PA13 (AIN1） 上层
+L2: PA26(AIN2）、PA27(AIN1） 下层
+
+R1: PB6(BIN1)、PB7(BIN2)  上层
+R2: PB8(BIN2)、PB9(BIN1） 下层
+
+
+
+L1电机编码器  上层板
+PA14 接A相 E1A
+PA15 接B相 E1B
+
+L2电机编码器   下层板
+PA24 接A相 E1A
+PA25 接B相 E1B
+
+
+R1电机编码器  上层板
+PA8 接A相 E2A
+PA9 接B相 E2B
+
+R2电机编码器   下层板
+PA21 接A相 E2A
+PA22 接B相 E2B
+
+
+
+用io吧
+x1-x8的顺序
+A28
+A31
+A02
+B24
+
+B20
+B19
+B18
+A07
+
