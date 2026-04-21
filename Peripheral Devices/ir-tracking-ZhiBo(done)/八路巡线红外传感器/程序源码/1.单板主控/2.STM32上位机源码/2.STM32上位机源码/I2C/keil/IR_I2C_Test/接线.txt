@@ -1,2 +1,0 @@
-PB10  - SCL
-PB11 - SDA
