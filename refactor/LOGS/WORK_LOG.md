@@ -14,3 +14,5 @@
 	- `ticlang/NUEDC2025_MSPM0G3507_ticlang.projectspec`
 - Added project/readme artifacts:
 	- `README.md`, `.gitignore`, `Report/README.md`, `Reference/README.md`
+- commit cfcc08207e5fccce5ef6e8a8a6d30d0fa8b5a084 refactor(project): reorganize 2025E sources into CCS-importable layout
+- Exported commit snapshot to `refactor/LOGS/GIT_LOG_2026-04-22.txt`.
