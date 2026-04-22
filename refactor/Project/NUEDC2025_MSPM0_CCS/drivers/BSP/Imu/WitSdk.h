@@ -6,6 +6,7 @@ extern "C" {
 #endif
 
 #include "AllHeader.h"
+#include "Reg.h"
 
 
 #define WIT_HAL_OK      (0)     /**< There is no error */
@@ -123,7 +124,7 @@ int32_t WitSetCanBaud(int32_t uiBaudIndex);
 
 void IT_JY61P(void);
 void GYROSCOPE_DATA_Decoder(uint8_t *buf);
-void JY61P_Init(UART_HandleTypeDef *huart);
+void JY61P_Init(UART_Regs *uart);
 	
 char CheckRange(short sTemp,short sMin,short sMax);
 

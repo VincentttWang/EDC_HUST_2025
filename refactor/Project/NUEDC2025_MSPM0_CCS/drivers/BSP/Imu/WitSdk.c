@@ -503,81 +503,68 @@ int32_t WitSetContent(int32_t uiRsw)
 	return WIT_HAL_OK;
 }
 
-void IT_JY61P(void){ 
-	if(GyroscopeUsart3RxBuffer[0] == 0x55)
-			{       
-				uint16_t AccelerationSumData = 0,AngularSumData = 0,AngleSumData = 0;
-							for(uint8_t index=0; index<GYROSCOPE_BUFFER_SIZE/3-1; index++)//Çó¼ÓËÙ¶ÈÐ£ÑéºÍ
-				{
-					AccelerationSumData += GyroscopeUsart3RxBuffer[index];
-				}
+void IT_JY61P(void){
+    if(GyroscopeUsart3RxBuffer[0] == 0x55)
+    {
+        uint16_t AccelerationSumData = 0, AngularSumData = 0, AngleSumData = 0;
+        for(uint8_t index = 0; index < GYROSCOPE_BUFFER_SIZE/3-1; index++)
+            AccelerationSumData += GyroscopeUsart3RxBuffer[index];
 
-				for(uint8_t index=GYROSCOPE_BUFFER_SIZE/3; index<2*GYROSCOPE_BUFFER_SIZE/3-1; index++)//Çó½ÇËÙ¶ÈÐ£ÑéºÍ
-				{
-					AngularSumData += GyroscopeUsart3RxBuffer[index];
-				}
+        for(uint8_t index = GYROSCOPE_BUFFER_SIZE/3; index < 2*GYROSCOPE_BUFFER_SIZE/3-1; index++)
+            AngularSumData += GyroscopeUsart3RxBuffer[index];
 
-				for(uint8_t index=2*GYROSCOPE_BUFFER_SIZE/3; index<GYROSCOPE_BUFFER_SIZE-1; index++)//Çó½Ç¶ÈÐ£ÑéºÍ
-				{
-					AngleSumData += GyroscopeUsart3RxBuffer[index];
-				} 
-							
-					if(GyroscopeUsart3RxBuffer[GYROSCOPE_BUFFER_SIZE/3-1] == (uint8_t)(AccelerationSumData&0X00FF)
-				&& GyroscopeUsart3RxBuffer[2*GYROSCOPE_BUFFER_SIZE/3-1] == (uint8_t)(AngularSumData&0X00FF)
-				&& GyroscopeUsart3RxBuffer[GYROSCOPE_BUFFER_SIZE-1] == (uint8_t)(AngleSumData&0X00FF))
-				{
-					GYROSCOPE_DATA_Decoder(GyroscopeUsart3RxBuffer);
-					HAL_UART_Receive_IT(&huart2, (uint8_t *)GyroscopeUsart3RxBuffer,33);  
-				}			
-							else
-				{
-				HAL_UART_Receive_IT(&huart2, (uint8_t *)GyroscopeUsart3RxBuffer,33); 					    
-				}							
-					}
-			else 
-			{
-				memset(GyroscopeUsart3RxBuffer,0x00,sizeof(GyroscopeUsart3RxBuffer));		
-				HAL_UART_Receive_IT(&huart2, (uint8_t *)GyroscopeUsart3RxBuffer,33);  					
-			}
-		}
+        for(uint8_t index = 2*GYROSCOPE_BUFFER_SIZE/3; index < GYROSCOPE_BUFFER_SIZE-1; index++)
+            AngleSumData += GyroscopeUsart3RxBuffer[index];
+
+        if(GyroscopeUsart3RxBuffer[GYROSCOPE_BUFFER_SIZE/3-1] == (uint8_t)(AccelerationSumData & 0x00FF)
+        && GyroscopeUsart3RxBuffer[2*GYROSCOPE_BUFFER_SIZE/3-1] == (uint8_t)(AngularSumData & 0x00FF)
+        && GyroscopeUsart3RxBuffer[GYROSCOPE_BUFFER_SIZE-1] == (uint8_t)(AngleSumData & 0x00FF))
+        {
+            GYROSCOPE_DATA_Decoder(GyroscopeUsart3RxBuffer);
+        }
+    }
+    else
+    {
+        memset(GyroscopeUsart3RxBuffer, 0x00, sizeof(GyroscopeUsart3RxBuffer));
+    }
+}
 
 void GYROSCOPE_DATA_Decoder(uint8_t *buf)
 {
-    if(buf[1] == 0x51)//½âÎöX¡¢Y¡¢Z¼ÓËÙ¶ÈÊý¾Ý
+    if(buf[1] == 0x51)//ï¿½ï¿½ï¿½ï¿½Xï¿½ï¿½Yï¿½ï¿½Zï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½
     {
-        GyroscopeChannelData[0] = (int16_t)((int16_t)buf[3]<<8|buf[2])/32768.0*16.0;//XÖá¼ÓËÙ¶È£¨m/s*s£©
-        GyroscopeChannelData[1] = (int16_t)((int16_t)buf[5]<<8|buf[4])/32768.0*16.0;//YÖá¼ÓËÙ¶È
-        GyroscopeChannelData[2] = (int16_t)((int16_t)buf[7]<<8|buf[6])/32768.0*16.0;//ZÖá¼ÓËÙ¶È
-        GyroscopeChannelData[9] = (int16_t)((int16_t)buf[9]<<8|buf[8])/100.0;//ÊµÊ±ÎÂ¶È£¨ÉãÊÏ¶È£©
+        GyroscopeChannelData[0] = (int16_t)((int16_t)buf[3]<<8|buf[2])/32768.0*16.0;//Xï¿½ï¿½ï¿½ï¿½Ù¶È£ï¿½m/s*sï¿½ï¿½
+        GyroscopeChannelData[1] = (int16_t)((int16_t)buf[5]<<8|buf[4])/32768.0*16.0;//Yï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+        GyroscopeChannelData[2] = (int16_t)((int16_t)buf[7]<<8|buf[6])/32768.0*16.0;//Zï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+        GyroscopeChannelData[9] = (int16_t)((int16_t)buf[9]<<8|buf[8])/100.0;//ÊµÊ±ï¿½Â¶È£ï¿½ï¿½ï¿½ï¿½Ï¶È£ï¿½
 			  
     }
 
-    if(buf[12] == 0x52)//½âÎöX¡¢Y¡¢Z½ÇËÙ¶ÈÊý¾Ý
+    if(buf[12] == 0x52)//ï¿½ï¿½ï¿½ï¿½Xï¿½ï¿½Yï¿½ï¿½Zï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½
     {
-        GyroscopeChannelData[3] = (int16_t)((int16_t)buf[14]<<8|buf[13])/32768.0*2000.0;//XÖá½ÇËÙ¶È£¨¡ã/s£©
-        GyroscopeChannelData[4] = (int16_t)((int16_t)buf[16]<<8|buf[15])/32768.0*2000.0;//YÖá½ÇËÙ¶È
-        GyroscopeChannelData[5] = (int16_t)((int16_t)buf[18]<<8|buf[17])/32768.0*2000.0;//ZÖá½ÇËÙ¶È
+        GyroscopeChannelData[3] = (int16_t)((int16_t)buf[14]<<8|buf[13])/32768.0*2000.0;//Xï¿½ï¿½ï¿½ï¿½Ù¶È£ï¿½ï¿½ï¿½/sï¿½ï¿½
+        GyroscopeChannelData[4] = (int16_t)((int16_t)buf[16]<<8|buf[15])/32768.0*2000.0;//Yï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+        GyroscopeChannelData[5] = (int16_t)((int16_t)buf[18]<<8|buf[17])/32768.0*2000.0;//Zï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
     }
  
-    if(buf[23] == 0x53)//½âÎöX¡¢Y¡¢Z½Ç¶ÈÊý¾Ý
+    if(buf[23] == 0x53)//ï¿½ï¿½ï¿½ï¿½Xï¿½ï¿½Yï¿½ï¿½Zï¿½Ç¶ï¿½ï¿½ï¿½ï¿½ï¿½
     {
-        GyroscopeChannelData[6] = (int16_t)((int16_t)buf[25]<<8|buf[24])/32768.0*180.0;//XÖá(¹ö×ª½Ç)½Ç¶È£¨¡ã£©
-        GyroscopeChannelData[7] = (int16_t)((int16_t)buf[27]<<8|buf[26])/32768.0*180.0;//YÖá(¸©Ñö½Ç)½Ç¶È
-        GyroscopeChannelData[8] = (int16_t)((int16_t)buf[29]<<8|buf[28])/32768.0*180.0;//ZÖá(Æ«º½½Ç)½Ç¶È
-        //GyroscopeChannelData[9] = (double)((int16_t)buf[31]<<8|(int16_t)buf[30])/100.0;//ÊµÊ±ÎÂ¶È£¨ÉãÊÏ¶È£©
+        GyroscopeChannelData[6] = (int16_t)((int16_t)buf[25]<<8|buf[24])/32768.0*180.0;//Xï¿½ï¿½(ï¿½ï¿½×ªï¿½ï¿½)ï¿½Ç¶È£ï¿½ï¿½ã£©
+        GyroscopeChannelData[7] = (int16_t)((int16_t)buf[27]<<8|buf[26])/32768.0*180.0;//Yï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)ï¿½Ç¶ï¿½
+        GyroscopeChannelData[8] = (int16_t)((int16_t)buf[29]<<8|buf[28])/32768.0*180.0;//Zï¿½ï¿½(Æ«ï¿½ï¿½ï¿½ï¿½)ï¿½Ç¶ï¿½
+        //GyroscopeChannelData[9] = (double)((int16_t)buf[31]<<8|(int16_t)buf[30])/100.0;//ÊµÊ±ï¿½Â¶È£ï¿½ï¿½ï¿½ï¿½Ï¶È£ï¿½
     }	
 }
 
-void JY61P_Init(UART_HandleTypeDef *huart){
-    //±£Ö¤´ÓÖ¡Í·¿ªÊ¼½ÓÊÕ
-    HAL_Delay(100);
-    int32_t init_time = HAL_GetTick();
-	  while(GyroscopeUsart3RxBuffer[0] != 0x55)	{
-        HAL_UART_Receive_IT(huart, (uint8_t *)GyroscopeUsart3RxBuffer,33);
-        if(HAL_GetTick() - init_time > 500) {
+void JY61P_Init(UART_Regs *uart){
+    extern uint32_t tick;
+    Delay_ms(100);
+    uint32_t init_time = tick;
+    while(GyroscopeUsart3RxBuffer[0] != 0x55) {
+        if(tick - init_time > 500) {
             snprintf(error_message, sizeof(error_message), "JY61P Init Failed");
-            Error_Handler(); // Handle error if yaw is out of range
-            break;  // ³¬Ê±ÍË³ö\
+            error_handler();
+            break;
         }
     }
 }

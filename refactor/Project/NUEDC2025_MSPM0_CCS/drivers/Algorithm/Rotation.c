@@ -1,4 +1,5 @@
 #include "Rotation.h"
+#include <math.h>
 
 /*
  * Rotation.c
