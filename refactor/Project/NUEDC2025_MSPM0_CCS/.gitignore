@@ -1,0 +1,7 @@
+Debug/
+.settings/
+targetConfigs/
+**/*.map
+**/*.obj
+**/*.o
+**/*.out

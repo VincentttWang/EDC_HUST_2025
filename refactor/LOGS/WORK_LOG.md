@@ -3,5 +3,14 @@
 ## 2026-04-22
 - Created branch `develop`.
 - Created `refactor/Project`, `refactor/Report`, `refactor/Reference`, and `refactor/LOGS`.
-- Next: build a CCS-friendly project layout in `refactor/Project` based on `2025E/工程文件`.
-- commit 1ea3b6a86beac8f43a6b05d0f9dd6aa45c38e64d chore(refactor): initialize refactor workspace skeleton
+- commit 09d4af79a20af2268357f3d26d398ef75c7303cd chore(refactor): initialize refactor workspace skeleton
+- Created `refactor/Project/NUEDC2025_MSPM0_CCS` with CCS-oriented layout:
+	- `app/main.c`
+	- `config/empty.syscfg`, `config/ti_msp_dl_config.c`, `config/ti_msp_dl_config.h`
+	- `drivers/BSP/*`, `drivers/Utils/*`
+	- `ticlang/device_linker.cmd`
+- Removed test/example sources from refactored drivers: 9 files.
+- Added CCS import descriptor:
+	- `ticlang/NUEDC2025_MSPM0G3507_ticlang.projectspec`
+- Added project/readme artifacts:
+	- `README.md`, `.gitignore`, `Report/README.md`, `Reference/README.md`
