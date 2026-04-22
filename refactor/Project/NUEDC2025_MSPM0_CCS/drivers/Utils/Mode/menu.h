@@ -4,20 +4,15 @@
 #include "mode_tree.h"
 #include "circle_list.h"
 #include "OLED.h"
-#include "stdbool.h"
+#include <stdbool.h>
 #include "project_build_config.h"
 
-#define END_X 128 // End X coordinate for the OLED display
+#define END_X 128
 
-// Function prototypes for menu operations
 void menu_init(void);
-void menu_display(ModeTree *modeTree);
 void menu_function(void);
 void select_menu(ModeTree *modeTree);
-
 void menu_begin(void);
+bool is_menu_node(ModeTree *node);
 
-bool is_menu_node(ModeTree *node); // Check if the node is a menu node
-
-
-#endif // MENU_H
+#endif /* MENU_H */
