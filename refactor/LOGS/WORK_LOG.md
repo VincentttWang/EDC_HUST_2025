@@ -62,3 +62,18 @@
 	- Removed dead/commented-out code: Delay.c (old delay implementation), tracking.c (commented motor lines, unused variables), tracking_delay.c (STM32 HAL references), pid.c (garbled comments).
 	- Improved encapsulation: renamed `Le`/`Ri` to `g_motor_left`/`g_motor_right`, made tracking.c module variables static, removed unused `speed_lr`/`speed_L1_setup`/`speed_R1_setup`/`trun_flag`.
 	- Redesigned PID interface: merged `PIDdata` + `PIDConfig` into `PIDController` struct. `PID_Init()` now takes Kp/Ki/Kd/integral_limit. `PID_Compute()` no longer requires passing gains each call. Added `PID_Reset()`. Windup limits now configurable per-controller. Updated Cont_SMotor.c call site.
+- Refactor round 6 (directory restructure & file rename to PascalCase):
+	- Completely reorganized `drivers/` directory tree:
+		- `drivers/Utils/` eliminated, split into `drivers/Algorithm/`, `drivers/System/`, `drivers/App/`
+		- `drivers/common/` -> `drivers/Common/`
+		- BSP subdirectories renamed: `Motor_Encoder` -> `Motor`, `SMotor` -> `StepMotor`, `OLED` -> `Oled`, `key` -> `Key`, `Laser_USART` -> `Laser`, `JY61P` -> `Imu`
+	- All files renamed to PascalCase:
+		- BSP: `tb6612fng.h/c` -> `Tb6612fng`, `Hall_Encoder` -> `HallEncoder`, `SMotor` -> `StepMotor`, `OLED` -> `Oled`, `OLED_Font` -> `OledFont`, `key` -> `Key`, `Laser_USART` -> `LaserUsart`, `wit_c_sdk` -> `WitSdk`, `REG` -> `Reg`, `bsp_common` -> `BspCommon`
+		- Algorithm: `pid` -> `Pid`, `kinematics` -> `Kinematics`, `tracking` -> `Tracking`, `Cont_SMotor` -> `StepMotorCtrl`
+		- System: `Init_SMotor` -> `InitStepMotor`
+		- App: `mode` -> `Mode`, `menu` -> `Menu`, `mode_tree` -> `ModeTree`, `circle_list` -> `CircleList`
+	- Merged `tracking_delay.h/c` into `Delay.h/c` (removed duplicate delay module)
+	- Updated all `#include` directives across every source file
+	- Updated header guards to match new filenames
+	- Updated CCS `.cproject` include paths for new directory structure
+	- Removed obsolete documentation files from old directories
