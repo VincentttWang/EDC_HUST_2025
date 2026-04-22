@@ -28,3 +28,9 @@
 - commit d8946238ac5c233750f8588d42d759d91b7f7db7 fix(ccs-import): make refactor project import in-place without 2025E path drift
 - Fixed project ignore rules to include portable CCS target config files.
 - commit 3a79f1484f3352f5db769eb6d5c6f1f16f7f051d fix(ccs-import): track targetConfigs for portable debug setup
+- Refactor round 2 (embedded maintainability):
+	- Header dependency cleanup to reduce umbrella include coupling.
+	- Removed recursive `AllHeader.h` dependency from `Initialize.h`, `tracking.h`, `Rotation.h`.
+	- Added project-level build switch file: `config/project_build_config.h`.
+	- Added menu test-entry compile switch `PROJECT_ENABLE_TEST_MODES`.
+	- Updated project README with build switch usage notes.

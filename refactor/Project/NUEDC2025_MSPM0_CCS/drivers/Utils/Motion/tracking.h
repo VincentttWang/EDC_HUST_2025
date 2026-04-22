@@ -1,7 +1,7 @@
 #ifndef _IRTRACKING_H_
 #define _IRTRACKING_H_
 
-#include "AllHeader.h"
+#include <stdint.h>
 
 void car_irtrack(void); 
 

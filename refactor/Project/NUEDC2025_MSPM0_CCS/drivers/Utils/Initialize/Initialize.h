@@ -1,9 +1,12 @@
 #ifndef INITIALIZE_H
 #define INITIALIZE_H
 
+#include <stdint.h>
+
 // �˶�ѧͷ�ļ�������������ֱ��ת�亯��
 #include "kinematics.h"
-#include "AllHeader.h"
+#include "tb6612fng.h"
+#include "ti_msp_dl_config.h"
 //激光通信头文件
 #include "Laser_USART.h"
 

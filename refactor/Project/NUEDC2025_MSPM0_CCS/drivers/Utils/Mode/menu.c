@@ -53,19 +53,21 @@ void menu_init(void)
     now_mode_tree->parent = NULL; // Set the parent of the root node to NULL 
     OLED_Clear(); // Clear the OLED display
     
-    // 构建测试菜单树结构
     // 创建主菜单的子菜单项
-    ModeNode TestNode = {menu_function, "Test Menu"}; // Create a test menu node
     ModeNode ProBNode = {menu_function, "Problem B"}; // Create a problem menu node
     ModeNode ProHNode = {menu_function, "Problem H"}; // Create a custom menu node
 
-    ModeTree *testMenu = createModeTree(TestNode); // Create the test menu tree
     ModeTree *problemBMenu = createModeTree(ProBNode); // Create the problem menu tree
     ModeTree *proHMenu = createModeTree(ProHNode); // Create the custom menu tree
 
-    addChild(now_mode_tree, testMenu);
     addChild(now_mode_tree, problemBMenu);
     addChild(now_mode_tree, proHMenu); // Add the problem menu to the main menu
+
+#if PROJECT_ENABLE_TEST_MODES
+    // 构建测试菜单树结构
+    ModeNode TestNode = {menu_function, "Test Menu"}; // Create a test menu node
+    ModeTree *testMenu = createModeTree(TestNode); // Create the test menu tree
+    addChild(now_mode_tree, testMenu);
 
     // Add child nodes to the test menu
     ModeNode test_dis_mode = {test_dis, "Test Distance"}; // Create a test distance node
@@ -81,6 +83,7 @@ void menu_init(void)
     addChild(testMenu, createModeTree(test_cordi_mode));
     addChild(testMenu, createModeTree(test_circle_mode));
     addChild(testMenu, createModeTree(test_track_mode));
+#endif
 
     ModeNode ProB1menu = {menu_function, "ProB1"}; // Create a sub-menu node for Problem B
     ModeNode ProB2_3menu = {proB_2_3, "ProB2/3"}; // Create a sub-menu node for Problem B

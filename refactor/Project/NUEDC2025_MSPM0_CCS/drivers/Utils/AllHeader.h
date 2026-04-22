@@ -2,12 +2,10 @@
 #define ALLHEADERS_H
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <math.h>
 #include <string.h>
 
 #include "ti_msp_dl_config.h"
-#include "OLED.h"
 #include "Delay.h"
 #include "tb6612fng.h"
 

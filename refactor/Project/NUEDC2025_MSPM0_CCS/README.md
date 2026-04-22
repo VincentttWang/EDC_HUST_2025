@@ -28,3 +28,9 @@ This repository now includes native CCS metadata (`.project/.cproject/.ccsprojec
 - Main entry file is `app/main.c`.
 - SysConfig file is `config/empty.syscfg`.
 - Generated config files are in `config/ti_msp_dl_config.c` and `config/ti_msp_dl_config.h`.
+
+## Build Switches
+- File: `config/project_build_config.h`
+- `PROJECT_ENABLE_TEST_MODES`:
+  - `1`: include test menu entries in UI tree
+  - `0`: exclude test menu entries for competition/release firmware

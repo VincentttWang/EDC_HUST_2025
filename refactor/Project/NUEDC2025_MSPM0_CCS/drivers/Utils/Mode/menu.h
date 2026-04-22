@@ -3,11 +3,11 @@
 
 #include "mode_tree.h"
 #include "circle_list.h"
-#include "oled.h"
+#include "OLED.h"
 #include "stdbool.h"
+#include "project_build_config.h"
 
 #define END_X 128 // End X coordinate for the OLED display
-#define TEST_MENU
 
 // Function prototypes for menu operations
 void menu_init(void);
