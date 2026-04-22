@@ -1,9 +1,8 @@
-#ifndef TRACKING_H
-#define TRACKING_H
+#ifndef TRACKING_SENSOR_H
+#define TRACKING_SENSOR_H
 
-#include <stdint.h> // 包含stdint.h以使用uint8_t类型
+#include <stdint.h>
 
-// 获取循迹传感器数据函数
-void getTrackingSensorData(uint8_t digitalArray[8]);
+void TrackingSensor_Read(uint8_t digitalArray[8]);
 
-#endif // TRACKING_H
+#endif /* TRACKING_SENSOR_H */

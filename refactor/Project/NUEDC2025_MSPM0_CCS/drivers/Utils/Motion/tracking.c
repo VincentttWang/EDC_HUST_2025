@@ -103,8 +103,8 @@ void Motion_Car_Control(int16_t V_x, int16_t V_y, int16_t V_z)
     speed_spin = (V_z / 1000.0f) * robot_APB;
     if (V_x == 0 && V_y == 0 && V_z == 0)
     {
-        RSet(0);
-				LSet(0);
+        Motor_SetRight(0);
+        Motor_SetLeft(0);
         return;
     }
 
@@ -124,7 +124,7 @@ void Motion_Car_Control(int16_t V_x, int16_t V_y, int16_t V_z)
     
     //printf("%d\t,%d\t,%d\t,%d\r\n",speed_L1_setup,speed_L2_setup,speed_R1_setup,speed_R2_setup);
     
-		LSet(speed_L2_setup);
-		RSet(speed_R2_setup);
+		Motor_SetLeft(speed_L2_setup);
+		Motor_SetRight(speed_R2_setup);
 		
 }

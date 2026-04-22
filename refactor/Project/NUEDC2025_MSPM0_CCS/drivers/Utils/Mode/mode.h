@@ -5,21 +5,20 @@
 #include "project_build_config.h"
 
 #if PROJECT_ENABLE_TEST_MODES
-void test_dis(void);
-void test_Cordi(void);
-void test_Circle(void);
-void test_Connect(void);
-void test_track(void);
+void mode_test_distance(void);
+void mode_test_coordinate(void);
+void mode_test_circle(void);
+void mode_test_connection(void);
+void mode_test_tracking(void);
 #endif
 
-void proB_1(void);
-void proB_2_3(void);
-void proH_1(void);
-void proH_2(void);
+void mode_problem_b_1(void);
+void mode_problem_b_2_3(void);
+void mode_problem_h_1(void);
+void mode_problem_h_2(void);
 
-int SetCircleNum(char num);
-bool turn_func(void);
+int mode_set_circle_num(char num);
+bool mode_turn_step(void);
+bool mode_init_guard(void);
 
-bool Init(void);
-
-#endif
+#endif /* MODE_H */

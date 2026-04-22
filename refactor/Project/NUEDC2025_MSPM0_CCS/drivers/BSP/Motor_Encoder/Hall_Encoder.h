@@ -1,24 +1,25 @@
-#ifndef _HALL_ENCODER_H_
-#define _HALL_ENCODER_H_
+#ifndef HALL_ENCODER_H
+#define HALL_ENCODER_H
 
 #include "ti_msp_dl_config.h"
+#include "bsp_common.h"
 
 typedef enum {
-    D,  // 正向
-    R  // 反向
-} ENCODER_DIR;
+    ENCODER_DIR_FORWARD = 0,
+    ENCODER_DIR_REVERSE = 1,
+} EncoderDir;
 
 typedef struct {
-    volatile long long temp_count; //保存实时计数值
-    int count;         						 //根据定时器时间更新的计数值
-    ENCODER_DIR dir;            	 //旋转方向
-} ENCODER_RES;
+    volatile long long temp_count;
+    int count;
+    EncoderDir dir;
+} EncoderState;
 
+void Encoder_Init(void);
+int Encoder_GetCount(void);
+EncoderDir Encoder_GetDir(void);
+void Encoder_Update(void);
+void Encoder_TimerInit(void);
+double Encoder_GetSpeed(void);
 
-void encoder_init(void);
-int get_encoder_count(void);
-ENCODER_DIR get_encoder_dir(void);
-void encoder_update(void);
-void timer_init(void);
-double getSpeed(void);
-#endif
+#endif /* HALL_ENCODER_H */

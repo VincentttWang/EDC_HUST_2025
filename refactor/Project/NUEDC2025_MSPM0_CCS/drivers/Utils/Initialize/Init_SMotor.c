@@ -26,10 +26,10 @@ void YP_SMotor_Init(void) {
                 YAW_SMOTOR_PWM_CHANNEL);    // PWM通道
     
     // 设置YAW电机参数
-    SMotor_Parameters_Init(&yawMotor, 
-                          YAW_SMOTOR_ANTI_DIR,       // 反向状态
-                          YAW_SMOTOR_STEP_ANGULAR,   // 步进角度
-                          YAW_SMOTOR_STEP_DIVISOR);  // 细分数
+    SMotor_ParamInit(&yawMotor,
+                     YAW_SMOTOR_ANTI_DIR,
+                     YAW_SMOTOR_STEP_ANGULAR,
+                     YAW_SMOTOR_STEP_DIVISOR);
     
     // 初始化PITCH步进电机 (俯仰控制)
     SMotor_Init(&pitchMotor, 
@@ -39,10 +39,10 @@ void YP_SMotor_Init(void) {
                 PITCH_SMOTOR_PWM_CHANNEL);  // PWM通道
     
     // 设置PITCH电机参数
-    SMotor_Parameters_Init(&pitchMotor, 
-                          PITCH_SMOTOR_ANTI_DIR,     // 反向状态
-                          PITCH_SMOTOR_STEP_ANGULAR, // 步进角度
-                          PITCH_SMOTOR_STEP_DIVISOR); // 细分数
+    SMotor_ParamInit(&pitchMotor,
+                     PITCH_SMOTOR_ANTI_DIR,
+                     PITCH_SMOTOR_STEP_ANGULAR,
+                     PITCH_SMOTOR_STEP_DIVISOR);
 }
 
 void YP_SMotor_SetSpeed(float yaw_speed, float pitch_speed) {

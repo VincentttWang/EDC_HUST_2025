@@ -1,56 +1,56 @@
 /**
  * @file      OLED.h
- * @brief     SSD1306 OLEDÏÔÊ¾ÆÁÇý¶¯¿âµÄÍ·ÎÄ¼þ (Èí¼þI2C)
- * @details   ±¾Çý¶¯Ê¹ÓÃÈí¼þÄ£ÄâI2CÐ­ÒéÓëOLEDÍ¨ÐÅ¡£ËüÌá¹©ÁËOLED³õÊ¼»¯¡¢
- * ÏÔÊ¾×Ö·û¡¢Êý×Ö¡¢×Ö·û´®ºÍÎ»Í¼µÈ¹¦ÄÜ¡£
+ * @brief     SSD1306 OLEDï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½Ä¼ï¿½ (ï¿½ï¿½ï¿½ï¿½I2C)
+ * @details   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½I2CÐ­ï¿½ï¿½ï¿½ï¿½OLEDÍ¨ï¿½Å¡ï¿½ï¿½ï¿½ï¿½á¹©ï¿½ï¿½OLEDï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½Ê¾ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Î»Í¼ï¿½È¹ï¿½ï¿½Ü¡ï¿½
  * @author    Jianing Wang
  * @version   1.1
  * @date      2025-07-31
- * @note      - ±¾Çý¶¯ÒÀÀµÓÚÒ»¸öÌá¹©Î¢Ãë¼¶ÑÓÊ±º¯Êý `Delay_us()` µÄÑÓÊ±¿â¡£
- * - Ê¹ÓÃÇ°£¬ÇëÈ·±£ÒÑÔÚSysConfigÖÐÅäÖÃÁËSCLºÍSDAÒý½Å£¬²¢ÔÚ´ËÎÄ¼þÖÐ
- * ÕýÈ·¶¨ÒåÁË`OLED_GPIO_PORT`¡¢`OLED_SCL_PIN`ºÍ`OLED_SDA_PIN`¡£
+ * @note      - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½á¹©Î¢ï¿½ë¼¶ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ `Delay_us()` ï¿½ï¿½ï¿½ï¿½Ê±ï¿½â¡£
+ * - Ê¹ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½SysConfigï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½SCLï¿½ï¿½SDAï¿½ï¿½ï¿½Å£ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
+ * ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½`OLED_GPIO_PORT`ï¿½ï¿½`OLED_SCL_PIN`ï¿½ï¿½`OLED_SDA_PIN`ï¿½ï¿½
  */
 
-#ifndef __OLED_H__
-#define __OLED_H__
+#ifndef OLED_H
+#define OLED_H
 
-#include "ti_msp_dl_config.h" // ÒýÈëTI MSPM0µÄµ×²ã¿â
-#include <stdint.h>          // ÒýÈë±ê×¼ÕûÊýÀàÐÍ
+#include "ti_msp_dl_config.h" // ï¿½ï¿½ï¿½ï¿½TI MSPM0ï¿½Äµ×²ï¿½ï¿½
+#include <stdint.h>          // ï¿½ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 //==================================================================================
-// ÓÃ»§ÅäÖÃÇø (User Configuration)
+// ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (User Configuration)
 //==================================================================================
 
-// ¶¨ÒåOLEDÁ¬½ÓµÄGPIO¶Ë¿Ú
-// ÀýÈç£ºÈç¹ûÄú½«SCLºÍSDA¶¼Á¬½Óµ½GPIOA£¬ÕâÀï¾ÍÊ¹ÓÃGPIOA
+// ï¿½ï¿½ï¿½ï¿½OLEDï¿½ï¿½ï¿½Óµï¿½GPIOï¿½Ë¿ï¿½
+// ï¿½ï¿½ï¿½ç£ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½SCLï¿½ï¿½SDAï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½GPIOAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½GPIOA
 #define OLED_GPIO_PORT      (GPIOA)
 
 
 //==================================================================================
-// ÄÚ²¿ºê¶¨Òå (Internal Macros)
+// ï¿½Ú²ï¿½ï¿½ê¶¨ï¿½ï¿½ (Internal Macros)
 //==================================================================================
 
-#define OLED_CMD            (0) // Ð´ÃüÁîÄ£Ê½
-#define OLED_DATA           (1) // Ð´Êý¾ÝÄ£Ê½
+#define OLED_CMD            (0) // Ð´ï¿½ï¿½ï¿½ï¿½Ä£Ê½
+#define OLED_DATA           (1) // Ð´ï¿½ï¿½ï¿½ï¿½Ä£Ê½
 
 //----------------------------------------------------------------------------------
-// OLED SSD1306 I2C Ê±ÖÓ SCL Òý½Å²Ù×÷
+// OLED SSD1306 I2C Ê±ï¿½ï¿½ SCL ï¿½ï¿½ï¿½Å²ï¿½ï¿½ï¿½
 #define OLED_SCL_Set()      (DL_GPIO_setPins(OLED_GPIO_PORT, OLED_SCL_PIN))
 #define OLED_SCL_Clr()      (DL_GPIO_clearPins(OLED_GPIO_PORT, OLED_SCL_PIN))
 
 //----------------------------------------------------------------------------------
-// OLED SSD1306 I2C Êý¾Ý SDA Òý½Å²Ù×÷
+// OLED SSD1306 I2C ï¿½ï¿½ï¿½ï¿½ SDA ï¿½ï¿½ï¿½Å²ï¿½ï¿½ï¿½
 #define OLED_SDA_Set()      (DL_GPIO_setPins(OLED_GPIO_PORT, OLED_SDA_PIN))
 #define OLED_SDA_Clr()      (DL_GPIO_clearPins(OLED_GPIO_PORT, OLED_SDA_PIN))
 #define OLED_SDA_Read()     (DL_GPIO_readPins(OLED_GPIO_PORT, OLED_SDA_PIN))
 
 
 //==================================================================================
-// º¯ÊýÔ­ÐÍÉùÃ÷ (Function Prototypes)
+// ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (Function Prototypes)
 //==================================================================================
 
 
-//OLED¿ØÖÆÓÃº¯Êý
+//OLEDï¿½ï¿½ï¿½ï¿½ï¿½Ãºï¿½ï¿½ï¿½
 void OLED_ColorTurn(uint8_t i);
 void OLED_DisplayTurn(uint8_t i);
 void OLED_WR_Byte(uint8_t dat,uint8_t cmd);
@@ -66,4 +66,4 @@ void OLED_ShowChinese(uint8_t x,uint8_t y,uint8_t no,uint8_t sizey);
 void OLED_DrawBMP(uint8_t x,uint8_t y,uint8_t sizex, uint8_t sizey,uint8_t BMP[]);
 void OLED_Init(void);
 
-#endif /* __OLED_H__ */
+#endif /* OLED_H */

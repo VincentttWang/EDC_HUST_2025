@@ -32,7 +32,7 @@ void PID_SMotor_Cont(void)
     }
     float output_wyaw = 0.0f; // 输出的偏航速度
     float output_wpitch = 0.0f;
-    if(!is_updated && (!Laser_error )) {
+    if(!is_updated && (Laser_error == CANMV_ERR_NONE)) {
         output_wyaw = last_output_wyaw; // 如果没有更新数据，则使用上一次的输出
         output_wpitch = last_output_wpitch;
     }
@@ -61,7 +61,7 @@ void PID_SMotor_Cont(void)
 void SetTargetCenter(void)
 {
     // 计算目标中心位置
-    if(!Laser_error && Laser_Loc[0] != 0 && Laser_Loc[1] != 0 )
+    if(Laser_error == CANMV_ERR_NONE && Laser_Loc[0] != 0 && Laser_Loc[1] != 0 )
     {
         target_position.x = Laser_Loc[0];
         target_position.y = 480 - Laser_Loc[1];
@@ -71,7 +71,7 @@ void SetTargetCenter(void)
 
 void SetLaserPosition(void)
 {
-    if(!Laser_error)
+    if(Laser_error == CANMV_ERR_NONE)
     {
         laser_position.x = Laser_Loc[2]; // 设置激光雷达位置X坐标
         laser_position.y = 480 - Laser_Loc[3]; // 设置激光雷达位置Y坐标
@@ -80,7 +80,7 @@ void SetLaserPosition(void)
 
 void SetTargetCircle(void)
 {
-    if(!Rect_error)
+    if(Rect_error == CANMV_ERR_NONE)
     {
         target_position = paper_to_camera(get_target_coordinate()); // 获取目标坐标并转换为相机坐标系
         is_updated = true; // 设置数据已更新标志
@@ -102,19 +102,19 @@ void Compute_excur(void)
     switch(edge % 4)
     {
         case 0:
-            cor.yaw = - (getSpeed() * fabs(0.5f - sInedge) / d) / d; // 计算偏差
+            cor.yaw = - (Encoder_GetSpeed() * fabs(0.5f - sInedge) / d) / d; // 计算偏差
             break;
         case 1:
             // 处理边缘情况1
-            cor.yaw = (getSpeed() * 0.5f / d) / d;
+            cor.yaw = (Encoder_GetSpeed() * 0.5f / d) / d;
             break;
         case 2:
             // 处理边缘情况2
-            cor.yaw = (getSpeed() * fabs(0.5f - sInedge) / d) / d;
+            cor.yaw = (Encoder_GetSpeed() * fabs(0.5f - sInedge) / d) / d;
             break;
         case 3:
             // 处理边缘情况3
-            cor.yaw = - (getSpeed() * 0.5f / d) / d;
+            cor.yaw = - (Encoder_GetSpeed() * 0.5f / d) / d;
             break;
         default:
             // 处理其他情况

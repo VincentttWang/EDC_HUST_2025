@@ -34,3 +34,7 @@ This repository now includes native CCS metadata (`.project/.cproject/.ccsprojec
 - `PROJECT_ENABLE_TEST_MODES`:
   - `1`: include test menu entries in UI tree
   - `0`: exclude test menu entries for competition/release firmware
+
+## API Naming Policy
+- Mode-layer public APIs now use `mode_` prefix for consistency.
+- Legacy names are preserved as compatibility aliases in `drivers/Utils/Mode/mode.h` during transition.

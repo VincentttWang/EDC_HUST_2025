@@ -70,11 +70,11 @@ void menu_init(void)
     addChild(now_mode_tree, testMenu);
 
     // Add child nodes to the test menu
-    ModeNode test_dis_mode = {test_dis, "Test Distance"}; // Create a test distance node
-    ModeNode test_cordi_mode = {test_Cordi, "Test Coordinate"}; // Create a test coordinate node
-    ModeNode test_circle_mode = {test_Circle, "Test Circle"}; // Create a test circle node
-    ModeNode test_track_mode = {test_track, "Test Track"}; // Create a test track node
-    ModeNode test_connect_mode = {test_Connect, "Test Connect"}; // Create a test connect node
+    ModeNode test_dis_mode = {mode_test_distance, "Test Distance"}; // Create a test distance node
+    ModeNode test_cordi_mode = {mode_test_coordinate, "Test Coordinate"}; // Create a test coordinate node
+    ModeNode test_circle_mode = {mode_test_circle, "Test Circle"}; // Create a test circle node
+    ModeNode test_track_mode = {mode_test_tracking, "Test Track"}; // Create a test track node
+    ModeNode test_connect_mode = {mode_test_connection, "Test Connect"}; // Create a test connect node
 
     // Add the test nodes to the test menu
     addChild(testMenu, createModeTree(test_connect_mode)); // Add the connect test node
@@ -86,10 +86,10 @@ void menu_init(void)
 #endif
 
     ModeNode ProB1menu = {menu_function, "ProB1"}; // Create a sub-menu node for Problem B
-    ModeNode ProB2_3menu = {proB_2_3, "ProB2/3"}; // Create a sub-menu node for Problem B
+    ModeNode ProB2_3menu = {mode_problem_b_2_3, "ProB2/3"}; // Create a sub-menu node for Problem B
 
     ModeNode ProH1menu = {menu_function, "ProH1"}; // Create a sub-menu node for Problem H
-    ModeNode ProH2menu = {proH_2, "ProH2"};
+    ModeNode ProH2menu = {mode_problem_h_2, "ProH2"};
 
     ModeTree *ProBMenu1 = createModeTree(ProB1menu);
     ModeTree *ProBMenu2_3 = createModeTree(ProB2_3menu);
@@ -107,7 +107,7 @@ void menu_init(void)
     
     for(int i = 0; i < 5; i++)
     {
-        ModeNode CircleNode = {proB_1, circle_names[i]};
+        ModeNode CircleNode = {mode_problem_b_1, circle_names[i]};
         ModeTree *circleMenu = createModeTree(CircleNode); // Create a circle menu node
         addChild(ProBMenu1, circleMenu); // Add the circle menu to the Problem B menu
         if (circleMenu == NULL) {
@@ -120,7 +120,7 @@ void menu_init(void)
 
     for(int i = 0; i < 2; i++)
     {
-        ModeNode CircleNode = {proH_1, circle_names[i]};
+        ModeNode CircleNode = {mode_problem_h_1, circle_names[i]};
         ModeTree *circleMenu = createModeTree(CircleNode); // Create a circle menu node
         addChild(ProHMenu1, circleMenu); // Add the circle menu to the Problem H menu
         if (circleMenu == NULL) {

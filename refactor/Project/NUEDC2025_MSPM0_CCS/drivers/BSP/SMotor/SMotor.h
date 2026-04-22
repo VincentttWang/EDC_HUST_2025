@@ -2,6 +2,7 @@
 #define SMOTOR_H
 
 #include "ti_msp_dl_config.h"
+#include "bsp_common.h"
 
 #define STEP_ANGULAR 1.8f
 #define STEP_DIVISOR 32.0f // 32 steps per revolution
@@ -40,13 +41,13 @@ typedef struct {
     // Add any additional fields as needed
 } SMotor;
 
-void SMotor_Init(SMotor *motor,
-                 GPIO_Regs *Dir_port, uint32_t Dir_pin,
-                 GPTIMER_Regs *pwm_timer, DL_TIMER_CC_INDEX pwm_channel);
-void SMotor_SetSpeed(SMotor *motor, float angular_speed);
-void SMotor_Parameters_Init(SMotor *motor, SMOTOR_DIR_STATE Anti_Dir, float step_angular, float step_divisor);
-void SMotor_UpdateState(SMotor *motor);
-uint32_t GetClockFre(GPTIMER_Regs *timer);
-uint32_t GetStepFrequency(float angular_speed, SMotor *motor);
+BSP_Status SMotor_Init(SMotor *motor,
+                       GPIO_Regs *Dir_port, uint32_t Dir_pin,
+                       GPTIMER_Regs *pwm_timer, DL_TIMER_CC_INDEX pwm_channel);
+BSP_Status SMotor_SetSpeed(SMotor *motor, float angular_speed);
+BSP_Status SMotor_ParamInit(SMotor *motor, SMOTOR_DIR_STATE Anti_Dir, float step_angular, float step_divisor);
+BSP_Status SMotor_UpdateState(SMotor *motor);
+uint32_t SMotor_GetClockFreq(GPTIMER_Regs *timer);
+uint32_t SMotor_GetStepFreq(float angular_speed, SMotor *motor);
 
 #endif

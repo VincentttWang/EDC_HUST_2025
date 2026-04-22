@@ -8,40 +8,40 @@ extern char CircleNum; // Variable to hold the current circle number
 int isturn = 0; // Variable to track if the robot is turning
 bool turning = false;
 
-void test_dis(void)//±àÂëÆ÷²âÊÔº¯Êı
+void mode_test_distance(void)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½
 {
     while(1)
 		{
-			LSet(-200);
-			RSet(200);
+			Motor_SetLeft(-200);
+			Motor_SetRight(200);
 		}
 		
 }
 
-void test_Cordi(void)//²½½øµç»ú²âÊÔº¯Êı
+void mode_test_coordinate(void)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½
 {
 	YP_SMotor_Init();
 //    // Implement the functionality for test_Cordi here
 	while(1)
 	{
 	YP_SMotor_SetSpeed(180,0);
-		LSet(300);RSet(300);
+		Motor_SetLeft(300);Motor_SetRight(300);
 		Delay_ms(500);
-				LSet(-300);RSet(-300);
+				Motor_SetLeft(-300);Motor_SetRight(-300);
 			YP_SMotor_SetSpeed(-180,0);
 		Delay_ms(500);
 	}
 }
 
-void test_Circle(void)//Ô²ĞÎÔË¶¯²âÊÔº¯Êı
+void mode_test_circle(void)//Ô²ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½
 {
 	while(1)
 	{
 		UpdateSInedge();
-		getTrackingSensorData(Digital);
-		if(!turn_func())
+		TrackingSensor_Read(Digital);
+        if(!mode_turn_step())
 		{
-			Break();
+			Motor_Brake();
 			break;
 		}
 		Delay_ms(10);
@@ -49,7 +49,7 @@ void test_Circle(void)//Ô²ĞÎÔË¶¯²âÊÔº¯Êı
 	}
 }
 
-void test_Connect(void)
+void mode_test_connection(void)
 {
     char message[50];
     while(1)
@@ -62,24 +62,24 @@ void test_Connect(void)
     }
 }
 
-void test_track(void)
+void mode_test_tracking(void)
 {
     // Test the track function with a linear velocity of 0.3
     while(1)
     {
-		getTrackingSensorData(Digital);
+		TrackingSensor_Read(Digital);
         lineWalking_low();
         if(empty_Detect()) // Check if the empty detection condition is met
         {
-            Break(); // Break the loop if the condition is met
+            Motor_Brake(); // Motor_Brake the loop if the condition is met
             return; // Exit the function
         }
     }
 }
 
-void proB_1(void)//µÚ¶ş²½
+void mode_problem_b_1(void)//ï¿½Ú¶ï¿½ï¿½ï¿½
 {
-    int cn = SetCircleNum(CircleNum);
+    int cn = mode_set_circle_num(CircleNum);
     #ifdef MODE_DEBUG
     char debug_message[50];
     sprintf(debug_message, "CircleNum: %d", cn);
@@ -87,14 +87,14 @@ void proB_1(void)//µÚ¶ş²½
     #endif
     while(1)
     {
-		getTrackingSensorData(Digital);
+		TrackingSensor_Read(Digital);
 			UpdateSInedge();
         if(half_Detect() && (cn * 4 == edge - 1))
         {
-            Break(); // Break the loop if the condition is met
+            Motor_Brake(); // Motor_Brake the loop if the condition is met
             return; // Exit the function
         }
-        if(!turn_func()) // Check if the robot is turning
+        if(!mode_turn_step()) // Check if the robot is turning
         {
             lineWalking_low(); // Call the track function with a linear velocity of 0.3
         }
@@ -102,7 +102,7 @@ void proB_1(void)//µÚ¶ş²½
     }
 }
 
-void proB_2_3(void)
+void mode_problem_b_2_3(void)
 {
     #ifdef MODE_DEBUG
     OLED_ShowString(0, 0, "ProB2/3", 8); // Display the mode name on the OLED
@@ -111,7 +111,7 @@ void proB_2_3(void)
 	while(1){
 		SetLaserPosition(); // Set the laser position based on the current mode
     SetTargetCenter(); // Set the target center for the robot
-    if(Init())
+    if(mode_init_guard())
     {
         PID_SMotor_Cont(); // Call the PID control function for the motor
     }
@@ -119,26 +119,26 @@ void proB_2_3(void)
 	}
 }
 
-void proH_1(void)
+void mode_problem_h_1(void)
 {
     #ifdef MODE_DEBUG
     OLED_ShowString(0, 0, "ProH1", 8); // Display the mode name on the OLED
     #endif
-//    int cn = SetCircleNum(CircleNum);
-		int cn = SetCircleNum(1);
+//    int cn = mode_set_circle_num(CircleNum);
+        int cn = mode_set_circle_num(1);
 	
     YP_SMotor_Init();
     while(1)
     {
-		getTrackingSensorData(Digital);
+		TrackingSensor_Read(Digital);
         UpdateSInedge(); // Update the sInedge variable with the current speed
 
 		if(half_Detect() && (cn * 4 == edge)) // Check if the half detection condition is met
         {
-            Break(); // Break the loop if the condition is met
+            Motor_Brake(); // Motor_Brake the loop if the condition is met
             return; // Exit the function
         }
-        if(!turn_func()) // Check if the robot is turning
+        if(!mode_turn_step()) // Check if the robot is turning
         {
 					  DL_GPIO_setPins(LED_PORT, LED_LED0_PIN);
             lineWalking_low(); // Call the track function with a linear velocity of 0.3
@@ -153,7 +153,7 @@ void proH_1(void)
     }
 }
 
-void proH_2(void)
+void mode_problem_h_2(void)
 {
     #ifdef MODE_DEBUG
     OLED_ShowString(0, 0, "ProH2", 8); // Display the mode name on the OLED
@@ -161,17 +161,17 @@ void proH_2(void)
     YP_SMotor_Init();
     while(1)
     {
-        getTrackingSensorData(Digital);
+        TrackingSensor_Read(Digital);
         UpdateSInedge(); // Update the sInedge variable with the current speed
 
         if(half_Detect() && (4 == edge)) // Check if the half detection condition is met
         {
-            Break(); // Break the loop if the condition is met
+            Motor_Brake(); // Motor_Brake the loop if the condition is met
 						DL_GPIO_clearPins(SMotor_IO_PORT, SMotor_IO_EN1_PIN);
 						DL_GPIO_clearPins(SMotor_IO_PORT, SMotor_IO_EN2_PIN);
             return; // Exit the function
         }
-        if(!turn_func()) // Check if the robot is turning
+        if(!mode_turn_step()) // Check if the robot is turning
         {
             lineWalking_low(); // Call the track function with a linear velocity of 0.3
         }
@@ -185,7 +185,7 @@ void proH_2(void)
 
 }
 
-int SetCircleNum(char num)
+int mode_set_circle_num(char num)
 {
     // Convert the character to an integer
     if (num >= '0' && num <= '9') {
@@ -197,7 +197,7 @@ int SetCircleNum(char num)
     }
 }
 
-bool turn_func(void)//µÚ¶ş²½
+bool mode_turn_step(void)//ï¿½Ú¶ï¿½ï¿½ï¿½
 {
     static float nowSInedge = 0; // Variable to track the current sInedge value
     if(half_Detect() && isturn == 0) // Check if the half detection condition is met
@@ -209,18 +209,18 @@ bool turn_func(void)//µÚ¶ş²½
     {
 			float first_dis = DisSensorToWheel * 1e-3 + nowSInedge  - 0.06;
 			float second_dis = first_dis+ DEG_TO_RAD(90) * WHEEL_DIS * 1e-3 * 0.8;
-        if(sInedge < first_dis) // Check if the sInedge value is less than the threshold ×ßµÄÔ¶ÁË£¬µ÷Õâ¸ö¾àÀë
+        if(sInedge < first_dis) // Check if the sInedge value is less than the threshold ï¿½ßµï¿½Ô¶ï¿½Ë£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
-            LSet(200); // Set the left motor speed to 300//×ßµÄ²»¹»Ö± µ÷×ÅÁ½¸ölspeed rspeed
-            RSet(200); // Set the right motor speed to 300
+            Motor_SetLeft(200); // Set the left motor speed to 300//ï¿½ßµÄ²ï¿½ï¿½ï¿½Ö± ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½lspeed rspeed
+            Motor_SetRight(200); // Set the right motor speed to 300
             return true; // Return true to indicate that the robot is turning
         }
         else if(sInedge >= first_dis &&
-             sInedge < second_dis )//×ªÍä½Ç¶ÈºÜµÍµ÷Õâ¸ö
+             sInedge < second_dis )//×ªï¿½ï¿½Ç¶ÈºÜµÍµï¿½ï¿½ï¿½ï¿½
         {
 						turning = true;
-            LSet(-120); // Set the left motor speed to -300//Èç¹û×ªÍä²»¹»Ô­µØ£¬µ÷Õâ¸ö
-            RSet(120); // Set the right motor speed to 300
+            Motor_SetLeft(-120); // Set the left motor speed to -300//ï¿½ï¿½ï¿½×ªï¿½ä²»ï¿½ï¿½Ô­ï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            Motor_SetRight(120); // Set the right motor speed to 300
             return true; // Return true to indicate that the robot is turning
         }
 				
@@ -233,9 +233,9 @@ bool turn_func(void)//µÚ¶ş²½
 		
 }
 
-bool Init(void)
+bool mode_init_guard(void)
 {
-    if(Laser_error == 1)
+    if(Laser_error == CANMV_ERR_NOT_FOUND)
     {
         YP_SMotor_SetSpeed(-90, 0); // Set the speed of the motors to -120
         return false; // Return false to indicate initialization failure

@@ -34,3 +34,25 @@
 	- Added project-level build switch file: `config/project_build_config.h`.
 	- Added menu test-entry compile switch `PROJECT_ENABLE_TEST_MODES`.
 	- Updated project README with build switch usage notes.
+- Refactor round 3 (interface consistency):
+	- Standardized Mode public API names to `mode_` prefix.
+	- Updated call sites in `menu.c` and `app/main.c` to use standardized names.
+	- Added backward compatibility aliases in `mode.h` to avoid breaking legacy references.
+	- Updated README with API naming policy.
+- Refactor round 4 (BSP/Utils interface normalization & error handling):
+	- Created `drivers/common/bsp_common.h` with `BSP_Status` enum (BSP_OK, BSP_ERR_NULL, BSP_ERR_PARAM, BSP_ERR_TIMEOUT, BSP_ERR_BUSY) and `CanMV_Error` enum replacing magic int error codes.
+	- BSP layer renames (Module_Action pattern):
+		- tb6612fng: `MOVETYPE` -> `MotorMoveType`, `FOR/BACK/BREAK/SLIDE/SLEEP` -> `MOTOR_FORWARD/MOTOR_BACKWARD/MOTOR_BRAKE/MOTOR_SLIDE/MOTOR_SLEEP`, `PWM` -> `MotorPWM`, `Motor_UI_Init` -> `Motor_Init`, `Motor_UI_Set` -> `Motor_SetDuty`, `Motor_Param_Init` -> `Motor_ParamInit`, `speed_to_duty` -> `Motor_SpeedToDuty`, `MotorSet` -> `Motor_SetSpeed`. All return `BSP_Status`.
+		- Hall_Encoder: `D/R` -> `ENCODER_DIR_FORWARD/ENCODER_DIR_REVERSE`, `ENCODER_DIR` -> `EncoderDir`, `ENCODER_RES` -> `EncoderState`, `encoder_init` -> `Encoder_Init`, `get_encoder_count` -> `Encoder_GetCount`, `get_encoder_dir` -> `Encoder_GetDir`, `encoder_update` -> `Encoder_Update`, `timer_init` -> `Encoder_TimerInit`, `getSpeed` -> `Encoder_GetSpeed`.
+		- TrackingSensor: `getTrackingSensorData` -> `TrackingSensor_Read`.
+		- SMotor: `SMotor_Parameters_Init` -> `SMotor_ParamInit`, `GetClockFre` -> `SMotor_GetClockFreq`, `GetStepFrequency` -> `SMotor_GetStepFreq`. All init/set functions return `BSP_Status`. Removed `#ifdef INITIALIZE_H` error handling guards — replaced with return codes.
+		- Laser_USART: `Laser_send_char` -> `Laser_SendChar`, `Laser_send_string` -> `Laser_SendString`, `Get_Laser_Loc` -> `Laser_GetLoc`, `Get_Rect_Loc` -> `Rect_GetLoc`, `CanMV_Mode` -> `CanMV_Process`. Error variables changed from `int` to `CanMV_Error` enum.
+	- Utils layer renames:
+		- Initialize: `MECInit` -> `Motor_SystemInit`, `LSet` -> `Motor_SetLeft`, `RSet` -> `Motor_SetRight`, `Break` -> `Motor_Brake`, `LMotorSet` -> `Motor_SetLeftRaw`, `RMotorSet` -> `Motor_SetRightRaw`. Added `(void)` to all parameterless function declarations.
+	- Cleanup:
+		- Removed backward compatibility macros from `mode.h` (proB_1, test_dis, etc.).
+		- Removed STM32 legacy type aliases (u8, u16, u32, s8, s16, s32) from `tracking_delay.h`.
+		- Removed dead debug code in `SMotor.c` (extern yawMotor + debug block).
+		- Standardized header guards to `MODULE_H` pattern (removed `__OLED_H__`, `__DELAY_H` styles).
+		- Replaced all implicit `!Laser_error` / `!Rect_error` checks with explicit `== CANMV_ERR_NONE` comparisons.
+	- Updated all call sites across mode.c, tracking.c, Cont_SMotor.c, Init_SMotor.c, main.c.
