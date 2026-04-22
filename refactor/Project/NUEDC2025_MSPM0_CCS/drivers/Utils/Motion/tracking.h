@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 
-void lineWalking_high(void);
 void lineWalking_low(void);
 void lineWalking_core(int16_t speed, float kp, float ki, float kd);
 float PID_IR_Calc_Custom(int16_t actual_value, float kp, float ki, float kd);

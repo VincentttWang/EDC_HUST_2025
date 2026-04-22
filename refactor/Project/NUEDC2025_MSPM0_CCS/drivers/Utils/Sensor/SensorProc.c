@@ -58,14 +58,6 @@ Coordinate get_target_coordinate()
     return target;
 }
 
-Coordinate getCenter(void)
-{
-    Coordinate center;
-    center.x = PAPERWIDE / 2.0f;
-    center.y = PAPERHIGHT / 2.0f;
-    return center;
-}
-//以下函数用于处理灰度传感器
 float Grayscale_Num_To_Theta(int num)
 {
     // Convert the sensor number to an angle in degrees
