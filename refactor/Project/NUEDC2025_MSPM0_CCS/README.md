@@ -8,14 +8,21 @@ This project is a refactored, CCS-oriented layout extracted from `2025E/工程�
 - Preserve module layering:
   - `drivers/BSP`: board support drivers
   - `drivers/Utils`: control, mode, and algorithm utilities
-- Support direct import in CCS from `.projectspec`
+- Support direct import in CCS from `.project/.cproject/.ccsproject`
 
 ## Quick Import (CCS)
 1. Open CCS.
-2. Select `Project -> Import CCS Projects...`.
-3. Point to folder: `refactor/Project/NUEDC2025_MSPM0_CCS/ticlang`.
+2. Select `Project -> Import Existing CCS Eclipse Project`.
+3. Point to folder: `refactor/Project/NUEDC2025_MSPM0_CCS`.
 4. Choose project `NUEDC2025_MSPM0G3507_nortos_ticlang` and import.
 5. Build `Debug` configuration.
+
+## Optional Import (projectspec)
+If you prefer `Import CCS Projects`, use `refactor/Project/NUEDC2025_MSPM0_CCS/ticlang`.
+
+## Why old imports looked like 2025E
+CCS `projectspec` import may create a generated project copy in a different folder depending on wizard options.
+This repository now includes native CCS metadata (`.project/.cproject/.ccsproject`) under this folder to avoid that behavior.
 
 ## Notes
 - Main entry file is `app/main.c`.

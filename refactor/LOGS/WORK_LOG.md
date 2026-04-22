@@ -16,3 +16,12 @@
 	- `README.md`, `.gitignore`, `Report/README.md`, `Reference/README.md`
 - commit cfcc08207e5fccce5ef6e8a8a6d30d0fa8b5a084 refactor(project): reorganize 2025E sources into CCS-importable layout
 - Exported commit snapshot to `refactor/LOGS/GIT_LOG_2026-04-22.txt`.
+- Diagnosed import issue:
+	- CCS generated project copy under `2025E/工程文件/NUEDC2025_MSPM0G3507_nortos_ticlang` during import workflow.
+	- Root cause is import mode behavior of `.projectspec` workflow, not hardcoded `2025E` paths in refactor metadata.
+- Added native CCS project metadata into `refactor/Project/NUEDC2025_MSPM0_CCS`:
+	- `.project`, `.cproject`, `.ccsproject`, `targetConfigs/MSPM0G3507.ccxml`.
+- Normalized `.ccsproject` metadata:
+	- `origin` changed from absolute local path to relative `ticlang/NUEDC2025_MSPM0G3507_ticlang.projectspec`.
+	- `filesToOpen` changed to `app/main.c,config/empty.syscfg`.
+- Updated import docs in `refactor/README.md` and `refactor/Project/NUEDC2025_MSPM0_CCS/README.md`.

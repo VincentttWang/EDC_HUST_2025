@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?ccsproject version="1.0"?>
+<projectOptions>
+	<ccsVariant value="50:Theia-based"/>
+	<ccsVersion value="70.4.0"/>
+	<deviceFamily value="TMS470"/>
+	<connection value="common/targetdb/connections/TIXDS110_Connection.xml"/>
+	<executableActions value=""/>
+	<createSlaveProjects value=""/>
+	<ignoreDefaultDeviceSettings value="true"/>
+	<ignoreDefaultCCSSettings value="true"/>
+	<templateProperties value="id=NUEDC2025_MSPM0G3507_ticlang.projectspec.NUEDC2025_MSPM0G3507_nortos_ticlang,buildProfile=debug,isHybrid=true"/>
+	<activeTargetConfiguration value="targetConfigs/MSPM0G3507.ccxml"/>
+	<isTargetConfigurationManual value="false"/>
+	<sourceLookupPath value="${COM_TI_MSPM0_SDK_INSTALL_DIR}/source/ti/driverlib"/>
+	<origin value="ticlang/NUEDC2025_MSPM0G3507_ticlang.projectspec"/>
+	<filesToOpen value="app/main.c,config/empty.syscfg"/>
+</projectOptions>
