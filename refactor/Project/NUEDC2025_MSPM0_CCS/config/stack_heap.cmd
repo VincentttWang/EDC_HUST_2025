@@ -1,0 +1,2 @@
+--stack_size=4096
+--heap_size=1024
