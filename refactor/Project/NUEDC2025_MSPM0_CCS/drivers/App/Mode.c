@@ -8,7 +8,7 @@ extern char CircleNum; // Variable to hold the current circle number
 int isturn = 0; // Variable to track if the robot is turning
 bool turning = false;
 
-void mode_test_distance(void)//���������Ժ���
+void mode_test_distance(void) // 测试距离
 {
     while(1)
 		{
@@ -18,7 +18,7 @@ void mode_test_distance(void)//���������Ժ���
 		
 }
 
-void mode_test_coordinate(void)//����������Ժ���
+void mode_test_coordinate(void) // 测试坐标与转向
 {
 	YP_SMotor_Init();
 //    // Implement the functionality for test_Cordi here
@@ -33,7 +33,7 @@ void mode_test_coordinate(void)//����������Ժ���
 	}
 }
 
-void mode_test_circle(void)//Բ���˶����Ժ���
+void mode_test_circle(void) // 圆周运动测试
 {
 	while(1)
 	{
@@ -77,7 +77,7 @@ void mode_test_tracking(void)
     }
 }
 
-void mode_problem_b_1(void)//�ڶ���
+void mode_problem_b_1(void) // 题目B第一问
 {
     int cn = mode_set_circle_num(CircleNum);
     #ifdef MODE_DEBUG
@@ -197,7 +197,7 @@ int mode_set_circle_num(char num)
     }
 }
 
-bool mode_turn_step(void)//�ڶ���
+bool mode_turn_step(void)// 转弯步进控制
 {
     static float nowSInedge = 0; // Variable to track the current sInedge value
     if(half_Detect() && isturn == 0) // Check if the half detection condition is met
@@ -209,17 +209,17 @@ bool mode_turn_step(void)//�ڶ���
     {
 			float first_dis = DisSensorToWheel * 1e-3 + nowSInedge  - 0.06;
 			float second_dis = first_dis+ DEG_TO_RAD(90) * WHEEL_DIS * 1e-3 * 0.8;
-        if(sInedge < first_dis) // Check if the sInedge value is less than the threshold �ߵ�Զ�ˣ����������
+        if(sInedge < first_dis) // 距离未达阈值，直行前进
         {
-            Motor_SetLeft(200); // Set the left motor speed to 300//�ߵĲ���ֱ ��������lspeed rspeed
+            Motor_SetLeft(200); // 直行时设置左电机速度
             Motor_SetRight(200); // Set the right motor speed to 300
             return true; // Return true to indicate that the robot is turning
         }
         else if(sInedge >= first_dis &&
-             sInedge < second_dis )//ת��ǶȺܵ͵����
+             sInedge < second_dis ) // 达到转弯区间
         {
 						turning = true;
-            Motor_SetLeft(-120); // Set the left motor speed to -300//���ת�䲻��ԭ�أ������
+            Motor_SetLeft(-120); // 反转左电机，执行转弯
             Motor_SetRight(120); // Set the right motor speed to 300
             return true; // Return true to indicate that the robot is turning
         }

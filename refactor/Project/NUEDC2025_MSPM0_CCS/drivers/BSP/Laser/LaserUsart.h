@@ -1,3 +1,7 @@
+/**
+ * @file  LaserUsart.h
+ * @brief CanMV 视觉模块 UART 通信接口，提供坐标解析与目标定位
+ */
 #ifndef LASER_USART_H
 #define LASER_USART_H
 

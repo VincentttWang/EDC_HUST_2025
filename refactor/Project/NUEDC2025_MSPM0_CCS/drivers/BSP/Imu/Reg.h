@@ -1,3 +1,7 @@
+/**
+ * @file  Reg.h
+ * @brief WitMotion IMU 寄存器地址定义 (JY61P / WT901 系列)
+ */
 #ifndef __AHRSREG_H
 #define __AHRSREG_H
 
@@ -17,7 +21,7 @@ extern "C" {
 #define GXOFFSET	0x08
 #define GYOFFSET	0x09
 #define GZOFFSET	0x0a
-#define HXOFFSET	0x0b`
+#define HXOFFSET	0x0b
 #define HYOFFSET	0x0c
 #define HZOFFSET	0x0d
 #define D0MODE		0x0e

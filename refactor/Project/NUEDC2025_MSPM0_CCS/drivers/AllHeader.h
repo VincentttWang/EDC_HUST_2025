@@ -1,3 +1,7 @@
+/**
+ * @file  AllHeader.h
+ * @brief 全局头文件汇总，统一引入项目所有模块的头文件
+ */
 #ifndef ALLHEADERS_H
 #define ALLHEADERS_H
 

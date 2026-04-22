@@ -1,3 +1,7 @@
+/**
+ * @file  TrackingSensor.h
+ * @brief 8 路灰度循迹传感器接口
+ */
 #ifndef TRACKING_SENSOR_H
 #define TRACKING_SENSOR_H
 

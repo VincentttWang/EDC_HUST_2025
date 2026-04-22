@@ -1,3 +1,7 @@
+/**
+ * @file  StepMotor.c
+ * @brief 步进电机 BSP 驱动实现，提供初始化、调速与状态更新
+ */
 #include "StepMotor.h"
 #include <math.h>
 

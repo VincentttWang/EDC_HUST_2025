@@ -1,56 +1,56 @@
 /**
- * @file      OLED.h
- * @brief     SSD1306 OLED��ʾ���������ͷ�ļ� (����I2C)
- * @details   ������ʹ������ģ��I2CЭ����OLEDͨ�š����ṩ��OLED��ʼ����
- * ��ʾ�ַ������֡��ַ�����λͼ�ȹ��ܡ�
+ * @file      Oled.h
+ * @brief     SSD1306 OLED 显示屏驱动库头文件 (软件I2C)
+ * @details   通过软件模拟 I2C 协议驱动 OLED，提供初始化、显示字符、
+ *            数字、字符串、位图等功能。
  * @author    Jianing Wang
  * @version   1.1
  * @date      2025-07-31
- * @note      - ������������һ���ṩ΢�뼶��ʱ���� `Delay_us()` ����ʱ�⡣
- * - ʹ��ǰ����ȷ������SysConfig��������SCL��SDA���ţ����ڴ��ļ���
- * ��ȷ������`OLED_GPIO_PORT`��`OLED_SCL_PIN`��`OLED_SDA_PIN`��
+ * @note      - 需要提供微秒级延时函数 Delay_us() 的实现。
+ *            - 使用前请在 SysConfig 中配置 SCL 和 SDA 引脚，并在此文件中
+ *              正确配置 OLED_GPIO_PORT、OLED_SCL_PIN 和 OLED_SDA_PIN。
  */
 
 #ifndef OLED_H
 #define OLED_H
 
-#include "ti_msp_dl_config.h" // ����TI MSPM0�ĵײ��
-#include <stdint.h>          // �����׼��������
+#include "ti_msp_dl_config.h" // TI MSPM0 底层配置
+#include <stdint.h>          // 标准整数类型
 
 //==================================================================================
-// �û������� (User Configuration)
+// 用户配置区 (User Configuration)
 //==================================================================================
 
-// ����OLED���ӵ�GPIO�˿�
-// ���磺�������SCL��SDA�����ӵ�GPIOA�������ʹ��GPIOA
+// 定义 OLED 连接的 GPIO 端口
+// 例如：如果 SCL 和 SDA 连接到 GPIOA，则使用 GPIOA
 #define OLED_GPIO_PORT      (GPIOA)
 
 
 //==================================================================================
-// �ڲ��궨�� (Internal Macros)
+// 内部宏定义 (Internal Macros)
 //==================================================================================
 
-#define OLED_CMD            (0) // д����ģʽ
-#define OLED_DATA           (1) // д����ģʽ
+#define OLED_CMD            (0) // 写命令模式
+#define OLED_DATA           (1) // 写数据模式
 
 //----------------------------------------------------------------------------------
-// OLED SSD1306 I2C ʱ�� SCL ���Ų���
+// OLED SSD1306 I2C 时钟 SCL 引脚操作
 #define OLED_SCL_Set()      (DL_GPIO_setPins(OLED_GPIO_PORT, OLED_SCL_PIN))
 #define OLED_SCL_Clr()      (DL_GPIO_clearPins(OLED_GPIO_PORT, OLED_SCL_PIN))
 
 //----------------------------------------------------------------------------------
-// OLED SSD1306 I2C ���� SDA ���Ų���
+// OLED SSD1306 I2C 数据 SDA 引脚操作
 #define OLED_SDA_Set()      (DL_GPIO_setPins(OLED_GPIO_PORT, OLED_SDA_PIN))
 #define OLED_SDA_Clr()      (DL_GPIO_clearPins(OLED_GPIO_PORT, OLED_SDA_PIN))
 #define OLED_SDA_Read()     (DL_GPIO_readPins(OLED_GPIO_PORT, OLED_SDA_PIN))
 
 
 //==================================================================================
-// ����ԭ������ (Function Prototypes)
+// 函数原型声明 (Function Prototypes)
 //==================================================================================
 
 
-//OLED�����ú���
+// OLED 控制与显示函数
 void OLED_ColorTurn(uint8_t i);
 void OLED_DisplayTurn(uint8_t i);
 void OLED_WR_Byte(uint8_t dat,uint8_t cmd);

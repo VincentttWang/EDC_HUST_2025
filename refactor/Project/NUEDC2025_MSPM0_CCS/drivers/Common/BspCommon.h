@@ -1,3 +1,7 @@
+/**
+ * @file  BspCommon.h
+ * @brief BSP 公共类型定义，包含错误码、坐标、姿态等共享数据结构
+ */
 #ifndef BSP_COMMON_H
 #define BSP_COMMON_H
 

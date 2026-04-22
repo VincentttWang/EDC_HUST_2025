@@ -1,3 +1,7 @@
+/**
+ * @file  CircleList.c
+ * @brief 循环链表实现，基于静态内存池分配节点
+ */
 #include "CircleList.h"
 #include "AllHeader.h"
 

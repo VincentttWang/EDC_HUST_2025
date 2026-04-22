@@ -1,3 +1,7 @@
+/**
+ * @file  Pid.c
+ * @brief PID 控制器实现，提供初始化、计算、复位等功能
+ */
 #include "Pid.h"
 #include <stddef.h>
 

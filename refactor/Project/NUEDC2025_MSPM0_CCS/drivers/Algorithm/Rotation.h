@@ -1,3 +1,7 @@
+/**
+ * @file  Rotation.h
+ * @brief 旋转矩阵运算接口，提供矩阵构建、乘法、转置及欧拉角提取
+ */
 #ifndef ROTATION_H
 #define ROTATION_H
 

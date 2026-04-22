@@ -1,10 +1,9 @@
+/**
+ * @file  Rotation.c
+ * @brief 旋转矩阵运算，包含矩阵构建、乘法、转置及欧拉角提取
+ */
 #include "Rotation.h"
 #include <math.h>
-
-/*
- * Rotation.c
- * Description: Source file for rotation matrix functions
- */
 
 void rotation_matrix(RotationAngles angles, float matrix[3][3])
 {

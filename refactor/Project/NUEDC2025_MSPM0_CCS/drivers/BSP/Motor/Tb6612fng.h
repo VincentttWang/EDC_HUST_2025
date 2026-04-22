@@ -1,3 +1,7 @@
+/**
+ * @file  Tb6612fng.h
+ * @brief TB6612FNG 直流电机驱动接口，提供 PWM 调速与方向控制
+ */
 #ifndef TB6612FNG_H
 #define TB6612FNG_H
 

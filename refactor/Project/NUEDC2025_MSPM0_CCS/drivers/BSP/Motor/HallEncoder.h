@@ -1,3 +1,7 @@
+/**
+ * @file  HallEncoder.h
+ * @brief 霍尔编码器驱动接口，提供转速与方向检测
+ */
 #ifndef HALL_ENCODER_H
 #define HALL_ENCODER_H
 

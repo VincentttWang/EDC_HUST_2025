@@ -1,3 +1,7 @@
+/**
+ * @file  Menu.h
+ * @brief OLED 菜单系统接口，提供菜单显示与按键交互
+ */
 #ifndef MENU_H
 #define MENU_H
 

@@ -1,3 +1,7 @@
+/**
+ * @file  Tracking.h
+ * @brief 巡线算法接口，提供红外循迹 PID 控制与运动控制
+ */
 #ifndef TRACKING_H
 #define TRACKING_H
 

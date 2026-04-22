@@ -1,3 +1,7 @@
+/**
+ * @file  Mode.h
+ * @brief 应用模式接口，定义各题目模式与测试模式的入口函数
+ */
 #ifndef MODE_H
 #define MODE_H
 

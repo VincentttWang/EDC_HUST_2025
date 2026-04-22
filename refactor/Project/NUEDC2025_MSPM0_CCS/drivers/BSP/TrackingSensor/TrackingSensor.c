@@ -1,3 +1,7 @@
+/**
+ * @file  TrackingSensor.c
+ * @brief 8 路灰度循迹传感器驱动，读取各通道数字量
+ */
 #include "TrackingSensor.h"
 #include "ti_msp_dl_config.h"
 

@@ -1,3 +1,7 @@
+/**
+ * @file  CircleList.h
+ * @brief 循环链表数据结构，用于菜单模式的循环切换
+ */
 #ifndef CIRCLE_LIST_H
 #define CIRCLE_LIST_H
 
