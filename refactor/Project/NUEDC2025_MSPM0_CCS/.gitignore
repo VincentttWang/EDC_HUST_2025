@@ -1,6 +1,9 @@
 Debug/
 .settings/
 targetConfigs/
+!targetConfigs/
+!targetConfigs/*.ccxml
+!targetConfigs/readme.txt
 **/*.map
 **/*.obj
 **/*.o
