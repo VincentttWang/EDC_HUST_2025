@@ -16,46 +16,48 @@ extern bool turning;
 
 void PID_SMotor_Cont(void)
 {
-    static PIDdata pid_x, pid_y;
+    static PIDController pid_x, pid_y;
     static uint32_t last_update_time = 0;
-    static float last_output_wyaw = 0.0f; // 上一次偏航速度输出
+    static float last_output_wyaw = 0.0f;
     static float last_output_wpitch = 0.0f;
-    PIDConfig config_x = {0.2f, 0, 0};
-    PIDConfig config_y = {0.2f, 0, 0};
     uint32_t current_time = tick;
-    if(is_new_mode) {
-        PID_Init(&pid_x);
-        PID_Init(&pid_y);
-        is_new_mode = false; // 重置新模式标志
-        last_update_time = current_time; // 更新上次更新时间
-        return; // 如果是新模式则不进行PID计算
+
+    if (is_new_mode) {
+        PID_Init(&pid_x, 0.2f, 0.0f, 0.0f, 1000.0f);
+        PID_Init(&pid_y, 0.2f, 0.0f, 0.0f, 1000.0f);
+        is_new_mode = false;
+        last_update_time = current_time;
+        return;
     }
-    float output_wyaw = 0.0f; // 输出的偏航速度
+
+    float output_wyaw = 0.0f;
     float output_wpitch = 0.0f;
-    if(!is_updated && (Laser_error == CANMV_ERR_NONE)) {
-        output_wyaw = last_output_wyaw; // 如果没有更新数据，则使用上一次的输出
+
+    if (!is_updated && (Laser_error == CANMV_ERR_NONE)) {
+        output_wyaw = last_output_wyaw;
         output_wpitch = last_output_wpitch;
-    }
-    else if(is_updated) {
-        is_updated = false; // 重置更新标志
-        float dt = (current_time - last_update_time) / 1000.0f; // 时间间隔
+    } else if (is_updated) {
+        is_updated = false;
+        float dt = (current_time - last_update_time) / 1000.0f;
         PID_Update(&pid_x, target_position.x, laser_position.x, dt);
         PID_Update(&pid_y, target_position.y, laser_position.y, dt);
-        last_update_time = current_time; // 更新上次更新时间
-        // 计算PID输出
-        output_wyaw = -1 * PID_Compute(&pid_x, config_x.Kp, config_x.Ki, config_x.Kd);
-        output_wpitch = PID_Compute(&pid_y, config_y.Kp, config_y.Ki, config_y.Kd);
-        // 发送控制命令
+        last_update_time = current_time;
+        output_wyaw = -1 * PID_Compute(&pid_x);
+        output_wpitch = PID_Compute(&pid_y);
     }
-    output_wpitch += cor.pitch; // 添加俯仰角校准
-    output_wyaw += cor.yaw; // 添加偏航角校准
-		
-		char message [50];	
-		snprintf(message, 50, "PID Yaw = %.2f", output_wyaw);
-		OLED_ShowString(0, 4, message, 8);
-		
-    YP_SMotor_SetSpeed( output_wyaw, output_wpitch); // 设置舵机速度
-    YP_SMotor_UpdateState(); // 更新舵机状态
+
+    output_wpitch += cor.pitch;
+    output_wyaw += cor.yaw;
+
+    last_output_wyaw = output_wyaw;
+    last_output_wpitch = output_wpitch;
+
+    char message[50];
+    snprintf(message, 50, "PID Yaw = %.2f", output_wyaw);
+    OLED_ShowString(0, 4, message, 8);
+
+    YP_SMotor_SetSpeed(output_wyaw, output_wpitch);
+    YP_SMotor_UpdateState();
 }
 
 void SetTargetCenter(void)

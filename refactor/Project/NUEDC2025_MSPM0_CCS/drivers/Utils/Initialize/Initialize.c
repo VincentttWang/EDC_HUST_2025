@@ -1,7 +1,7 @@
 #include "Initialize.h"
 #include "AllHeader.h"
 
-Motor Le, Ri;
+Motor g_motor_left, g_motor_right;
 CarState car;
 Data current_data;
 uint8_t Digital[8];
@@ -13,23 +13,23 @@ char message[100];
 
 void Motor_SystemInit(void)
 {
-    Motor_Init(&Le, LEFT_MOTOR_IN1_PORT, LEFT_MOTOR_IN1_PIN,
+    Motor_Init(&g_motor_left, LEFT_MOTOR_IN1_PORT, LEFT_MOTOR_IN1_PIN,
                LEFT_MOTOR_IN2_PORT, LEFT_MOTOR_IN2_PIN,
                LEFT_MOTOR_PWM_TIMER, LEFT_MOTOR_PWM_CHANNEL, LEFT_MOTOR_INIT_DUTY);
 
-    Motor_Init(&Ri, RIGHT_MOTOR_IN1_PORT, RIGHT_MOTOR_IN1_PIN,
+    Motor_Init(&g_motor_right, RIGHT_MOTOR_IN1_PORT, RIGHT_MOTOR_IN1_PIN,
                RIGHT_MOTOR_IN2_PORT, RIGHT_MOTOR_IN2_PIN,
                RIGHT_MOTOR_PWM_TIMER, RIGHT_MOTOR_PWM_CHANNEL, RIGHT_MOTOR_INIT_DUTY);
 }
 
 void Motor_SetLeftRaw(MotorMoveType type, uint16_t duty)
 {
-    Motor_SetDuty(type, duty, &Le);
+    Motor_SetDuty(type, duty, &g_motor_left);
 }
 
 void Motor_SetRightRaw(MotorMoveType type, uint16_t duty)
 {
-    Motor_SetDuty(type, duty, &Ri);
+    Motor_SetDuty(type, duty, &g_motor_right);
 }
 
 void Motor_SetLeft(int16_t duty)

@@ -1,80 +1,41 @@
-/*
-#include <stdint.h>
+#include <ti/devices/msp/msp.h>
 #include "ti_msp_dl_config.h"
+#include "Delay.h"
 
-void Delay_ms(volatile uint32_t ms)
-{
-	while(ms--)
-		delay_cycles(CPUCLK_FREQ / 1000) ;
-}
+extern uint32_t tick;
 
-void Delay_us(volatile uint32_t us)
-{
-	while(us--)
-		delay_cycles(CPUCLK_FREQ / 1000000) ;
-}
-*/
-
-#include <ti/devices/msp/msp.h>  // 重要：包含 SysTick 的定义
-#include "ti_msp_dl_config.h"
-#include "AllHeader.h"
-
-#define SystemClock 32000000
-
-/**
- * @brief 微秒级延时函数（基于 SysTick）
- * @param xus 延时时长，单位：微秒（最大值根据时钟而定）
- */
 void Delay_us(uint32_t xus)
 {
-//    // 假设 SystemCoreClock 已经定义，并等于 CPU 主频（例如 48MHz）
-//    uint32_t ticks = (SystemClock / 1000000) * xus;
+    uint32_t start_tick = SysTick->VAL;
+    uint32_t ticks_per_us = 32;
+    uint32_t ticks_to_wait = xus * ticks_per_us;
+    uint32_t elapsed_ticks = 0;
 
-//    SysTick->LOAD  = ticks - 1;  // 设置重载值
-//    SysTick->VAL   = 0;          // 清空当前值
-//    SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_ENABLE_Msk;  // 启动 SysTick（使用内核时钟）
+    if (ticks_to_wait == 0) return;
 
-//    while ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == 0); // 等待计数到0
-
-//    SysTick->CTRL  = 0; // 关闭 SysTick
+    do {
+        uint32_t current_tick = SysTick->VAL;
+        if (current_tick > start_tick)
+            elapsed_ticks += (start_tick + SysTick->LOAD + 1 - current_tick);
+        else
+            elapsed_ticks += (start_tick - current_tick);
+        start_tick = current_tick;
+    } while (elapsed_ticks < ticks_to_wait);
 }
 
-/**
- * @brief 毫秒级延时函数
- * @param xms 延时时长，单位：毫秒
- */
 void Delay_ms(uint32_t xms)
 {
-	uint32_t start_time, current_tick;
-      __disable_irq(); // 禁用中断
-      start_time = tick;
-      __enable_irq(); // 恢复中断
+    uint32_t start_time;
+    __disable_irq();
+    start_time = tick;
+    __enable_irq();
 
-			while(1) {
+    while (1) {
+        uint32_t current_tick;
         __disable_irq();
         current_tick = tick;
         __enable_irq();
-        if ((uint32_t)(current_tick - start_time) >= xms) {
+        if ((uint32_t)(current_tick - start_time) >= xms)
             break;
-        }
     }
 }
-
-/**
- * @brief 秒级延时函数
- * @param xs 延时时长，单位：秒
- */
-void Delay_s(uint32_t xs)
-{
-    while (xs--)
-        Delay_ms(1000);
-}
-
-
-uint32_t Gettick()
-{
-	__disable_irq(); // 禁用中断
-      uint32_t t = tick;
-      __enable_irq(); // 恢复中断
-	return t;
-} 

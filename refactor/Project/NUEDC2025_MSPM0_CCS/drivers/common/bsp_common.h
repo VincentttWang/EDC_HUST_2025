@@ -19,4 +19,14 @@ typedef enum {
     CANMV_ERR_FRAME_DROP =  3,
 } CanMV_Error;
 
+typedef struct {
+    float x;
+    float y;
+} Coordinate;
+
+typedef struct {
+    float yaw;
+    float pitch;
+} Attitude;
+
 #endif /* BSP_COMMON_H */

@@ -56,3 +56,9 @@
 		- Standardized header guards to `MODULE_H` pattern (removed `__OLED_H__`, `__DELAY_H` styles).
 		- Replaced all implicit `!Laser_error` / `!Rect_error` checks with explicit `== CANMV_ERR_NONE` comparisons.
 	- Updated all call sites across mode.c, tracking.c, Cont_SMotor.c, Init_SMotor.c, main.c.
+- Refactor round 5 (dependency cleanup, dead code removal, PID redesign):
+	- Fixed circular dependency: moved `Coordinate` and `Attitude` typedefs from `Cont_SMotor.h` to `bsp_common.h`. `SensorProc.h` now includes `bsp_common.h` instead of `Cont_SMotor.h`.
+	- Fixed `tracking.h` header guard from `_IRTRACKING_H_` to `TRACKING_H`.
+	- Removed dead/commented-out code: Delay.c (old delay implementation), tracking.c (commented motor lines, unused variables), tracking_delay.c (STM32 HAL references), pid.c (garbled comments).
+	- Improved encapsulation: renamed `Le`/`Ri` to `g_motor_left`/`g_motor_right`, made tracking.c module variables static, removed unused `speed_lr`/`speed_L1_setup`/`speed_R1_setup`/`trun_flag`.
+	- Redesigned PID interface: merged `PIDdata` + `PIDConfig` into `PIDController` struct. `PID_Init()` now takes Kp/Ki/Kd/integral_limit. `PID_Compute()` no longer requires passing gains each call. Added `PID_Reset()`. Windup limits now configurable per-controller. Updated Cont_SMotor.c call site.
