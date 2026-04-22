@@ -91,3 +91,9 @@
 	- CCS auto-discovers `.cmd` files in the project tree and adds them to `ORDERED_OBJS`, so both got linked.
 	- Fix: deleted `ticlang/device_linker.cmd`, added `--stack_size=4096` and `--heap_size=1024` as linker options in `.cproject`.
 	- Updated `.projectspec` to match current directory structure (was still referencing old pre-rename paths).
+- 注释修复与文档补充:
+	- 修复 Oled.h 文件头及内部注释乱码（GBK→UTF-8 损坏），重写为正确中文。
+	- 修复 Mode.c 中 5 处乱码行内注释（mode_turn_step、转弯逻辑等）。
+	- 修复 Reg.h 第20行 HXOFFSET 宏定义多余反引号。
+	- 为 19 个缺少文件头注释的源文件添加 @file/@brief 中文注释。
+	- 创建 `refactor/DOCS/CODING_STANDARDS.md` 中文开发规范文档，涵盖目录结构、命名规范、注释规范、编码风格、构建管理、Git 规范。
