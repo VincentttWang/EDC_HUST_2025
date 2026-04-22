@@ -25,3 +25,6 @@
 	- `origin` changed from absolute local path to relative `ticlang/NUEDC2025_MSPM0G3507_ticlang.projectspec`.
 	- `filesToOpen` changed to `app/main.c,config/empty.syscfg`.
 - Updated import docs in `refactor/README.md` and `refactor/Project/NUEDC2025_MSPM0_CCS/README.md`.
+- commit d8946238ac5c233750f8588d42d759d91b7f7db7 fix(ccs-import): make refactor project import in-place without 2025E path drift
+- Fixed project ignore rules to include portable CCS target config files.
+- commit 3a79f1484f3352f5db769eb6d5c6f1f16f7f051d fix(ccs-import): track targetConfigs for portable debug setup
