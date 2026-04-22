@@ -24,17 +24,17 @@
             -I${PROJECT_ROOT}/${ConfigName}
             -I${PROJECT_ROOT}/app
             -I${PROJECT_ROOT}/config
-            -I${PROJECT_ROOT}/drivers/Utils
-            -I${PROJECT_ROOT}/drivers/Utils/Initialize
-            -I${PROJECT_ROOT}/drivers/Utils/Motion
-            -I${PROJECT_ROOT}/drivers/Utils/Mode
-            -I${PROJECT_ROOT}/drivers/Utils/Sensor
-            -I${PROJECT_ROOT}/drivers/BSP/JY61P
-            -I${PROJECT_ROOT}/drivers/BSP/key
-            -I${PROJECT_ROOT}/drivers/BSP/Laser_USART
-            -I${PROJECT_ROOT}/drivers/BSP/Motor_Encoder
-            -I${PROJECT_ROOT}/drivers/BSP/OLED
-            -I${PROJECT_ROOT}/drivers/BSP/SMotor
+            -I${PROJECT_ROOT}/drivers
+            -I${PROJECT_ROOT}/drivers/Common
+            -I${PROJECT_ROOT}/drivers/System
+            -I${PROJECT_ROOT}/drivers/Algorithm
+            -I${PROJECT_ROOT}/drivers/App
+            -I${PROJECT_ROOT}/drivers/BSP/Imu
+            -I${PROJECT_ROOT}/drivers/BSP/Key
+            -I${PROJECT_ROOT}/drivers/BSP/Laser
+            -I${PROJECT_ROOT}/drivers/BSP/Motor
+            -I${PROJECT_ROOT}/drivers/BSP/Oled
+            -I${PROJECT_ROOT}/drivers/BSP/StepMotor
             -I${PROJECT_ROOT}/drivers/BSP/TrackingSensor
             -O0
             @device.opt
@@ -55,6 +55,8 @@
             -Wl,--warn_sections
             -L${CG_TOOL_ROOT}/lib
             -llibc.a
+            --stack_size=4096
+            --heap_size=1024
         "
         sysConfigBuildOptions="
             --output .
@@ -71,63 +73,60 @@
         <file path="../config/empty.syscfg" openOnCreation="true" excludeFromBuild="false" action="copy" />
         <file path="../config/ti_msp_dl_config.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
         <file path="../config/ti_msp_dl_config.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../ticlang/device_linker.cmd" openOnCreation="false" excludeFromBuild="false" action="copy" />
 
-        <file path="../drivers/Utils/AllHeader.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Delay.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Delay.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/AllHeader.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/Common/BspCommon.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
 
-        <file path="../drivers/Utils/Initialize/Initialize.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Initialize/Initialize.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Initialize/Init_SMotor.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Initialize/Init_SMotor.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/System/Delay.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/System/Delay.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/System/Initialize.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/System/Initialize.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/System/InitStepMotor.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/System/InitStepMotor.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
 
-        <file path="../drivers/Utils/Motion/Cont_SMotor.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Motion/Cont_SMotor.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Motion/kinematics.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Motion/kinematics.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Motion/pid.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Motion/pid.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Motion/tracking.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Motion/tracking.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Motion/tracking_delay.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Motion/tracking_delay.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/Algorithm/Kinematics.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/Algorithm/Kinematics.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/Algorithm/Pid.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/Algorithm/Pid.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/Algorithm/Rotation.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/Algorithm/Rotation.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/Algorithm/SensorProc.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/Algorithm/SensorProc.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/Algorithm/StepMotorCtrl.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/Algorithm/StepMotorCtrl.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/Algorithm/Tracking.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/Algorithm/Tracking.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
 
-        <file path="../drivers/Utils/Mode/circle_list.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Mode/circle_list.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Mode/menu.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Mode/menu.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Mode/mode.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Mode/mode.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Mode/mode_tree.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Mode/mode_tree.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/App/CircleList.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/App/CircleList.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/App/Menu.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/App/Menu.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/App/Mode.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/App/Mode.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/App/ModeTree.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/App/ModeTree.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
 
-        <file path="../drivers/Utils/Sensor/Rotation.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Sensor/Rotation.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Sensor/SensorProc.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/Utils/Sensor/SensorProc.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/BSP/Imu/Reg.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/BSP/Imu/WitSdk.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/BSP/Imu/WitSdk.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
 
-        <file path="../drivers/BSP/JY61P/REG.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/BSP/JY61P/wit_c_sdk.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/BSP/JY61P/wit_c_sdk.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/BSP/Key/Key.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/BSP/Key/Key.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
 
-        <file path="../drivers/BSP/key/key.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/BSP/key/key.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/BSP/Laser/LaserUsart.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/BSP/Laser/LaserUsart.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
 
-        <file path="../drivers/BSP/Laser_USART/Laser_USART.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/BSP/Laser_USART/Laser_USART.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/BSP/Motor/HallEncoder.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/BSP/Motor/HallEncoder.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/BSP/Motor/Tb6612fng.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/BSP/Motor/Tb6612fng.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
 
-        <file path="../drivers/BSP/Motor_Encoder/Hall_Encoder.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/BSP/Motor_Encoder/Hall_Encoder.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/BSP/Motor_Encoder/tb6612fng.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/BSP/Motor_Encoder/tb6612fng.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/BSP/Oled/Oled.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/BSP/Oled/Oled.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/BSP/Oled/OledFont.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
 
-        <file path="../drivers/BSP/OLED/OLED.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/BSP/OLED/OLED.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/BSP/OLED/OLED_Font.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
-
-        <file path="../drivers/BSP/SMotor/SMotor.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
-        <file path="../drivers/BSP/SMotor/SMotor.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/BSP/StepMotor/StepMotor.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
+        <file path="../drivers/BSP/StepMotor/StepMotor.h" openOnCreation="false" excludeFromBuild="false" action="copy" />
 
         <file path="../drivers/BSP/TrackingSensor/TrackingSensor.c" openOnCreation="false" excludeFromBuild="false" action="copy" />
         <file path="../drivers/BSP/TrackingSensor/TrackingSensor.h" openOnCreation="false" excludeFromBuild="false" action="copy" />

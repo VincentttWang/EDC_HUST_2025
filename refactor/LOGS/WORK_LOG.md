@@ -77,3 +77,17 @@
 	- Updated header guards to match new filenames
 	- Updated CCS `.cproject` include paths for new directory structure
 	- Removed obsolete documentation files from old directories
+- Build fix analysis:
+	- CCS build failed with "Target 'all' not remade because of errors" despite all visible .c files compiling.
+	- Root cause: stale `Debug/` build artifacts from pre-rename directory structure.
+		- `ORDERED_OBJS` in `Debug/makefile` was missing `drivers/BSP/Key/Key.o` — file compiled but never linked.
+		- Leftover `subdir_vars.mk`/`subdir_rules.mk` from old paths (`JY61P/`, `key/`, `Laser_USART/`, `Motor_Encoder/`, `SMotor/`, `Utils/`) referenced non-existent old include directories.
+	- Fix: delete `Debug/` folder and do a clean rebuild in CCS (Project → Clean → Build All). `Debug/` is auto-generated and gitignored.
+- Linker fix (duplicate device_linker.cmd):
+	- After clean rebuild, linker failed with "FLASH memory range has already been specified" (errors #10263/#10264).
+	- Root cause: two linker scripts both defining FLASH/SRAM/BCR_CONFIG/BSL_CONFIG memory regions:
+		- `ticlang/device_linker.cmd` — static file in repo (stack=4096, heap=1024)
+		- `Debug/device_linker.cmd` — SysConfig-generated (stack=512, no heap)
+	- CCS auto-discovers `.cmd` files in the project tree and adds them to `ORDERED_OBJS`, so both got linked.
+	- Fix: deleted `ticlang/device_linker.cmd`, added `--stack_size=4096` and `--heap_size=1024` as linker options in `.cproject`.
+	- Updated `.projectspec` to match current directory structure (was still referencing old pre-rename paths).
