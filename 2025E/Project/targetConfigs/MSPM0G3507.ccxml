@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <configurations XML_version="1.2" id="configurations_0">
     <configuration XML_version="1.2" id="configuration_0">
-        <instance XML_version="1.2" desc="Texas Instruments XDS110 USB Debug Probe" href="connections/TIXDS110_Connection.xml" id="Texas Instruments XDS110 USB Debug Probe" xml="TIXDS110_Connection.xml" xmlpath="connections"/>
-        <connection XML_version="1.2" id="Texas Instruments XDS110 USB Debug Probe">
-            <instance XML_version="1.2" href="drivers/tixds510cs_dap.xml" id="drivers" xml="tixds510cs_dap.xml" xmlpath="drivers"/>
-            <instance XML_version="1.2" href="drivers/tixds510cortexM0.xml" id="drivers" xml="tixds510cortexM0.xml" xmlpath="drivers"/>
-            <instance XML_version="1.2" href="drivers/tixds510sec_ap.xml" id="drivers" xml="tixds510sec_ap.xml" xmlpath="drivers"/>
-            <property Type="choicelist" Value="1" id="The JTAG TCLK Frequency (MHz)">
-                <choice Name="Fixed with user specified value" value="SPECIFIC">
-                    <property Type="stringfield" Value="1MHz" id="-- Enter a value from 100.0kHz to 2.5MHz"/>
-                </choice>
-            </property>
-            <property Type="choicelist" Value="2" id="SWD Mode Settings">
-                <choice Name="SWD Mode - Aux COM port is target TDO pin" value="nothing"/>
-            </property>
+        <instance XML_version="1.2" desc="SEGGER J-Link Emulator" href="connections/segger_j-link_connection.xml" id="SEGGER J-Link Emulator" xml="segger_j-link_connection.xml" xmlpath="connections"/>
+        <connection XML_version="1.2" id="SEGGER J-Link Emulator">
+            <instance XML_version="1.2" href="drivers/jlinkcs_dap.xml" id="drivers" xml="jlinkcs_dap.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers/jlinkcortexm0p.xml" id="drivers" xml="jlinkcortexm0p.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers/jlinksec_ap.xml" id="drivers" xml="jlinksec_ap.xml" xmlpath="drivers"/>
             <platform XML_version="1.2" id="platform_0">
                 <instance XML_version="1.2" desc="MSPM0G3507" href="devices/MSPM0G3507.xml" id="MSPM0G3507" xml="MSPM0G3507.xml" xmlpath="devices"/>
+                <device XML_version="1.2" id="MSPM0G3507" partnum="MSPM0G3507" HW_revision="1" description="ARM Cortex-M0 Plus MCU">
+                    <router XML_version="1.2" id="CS_DAP_0" HW_revision="1.0" isa="CS_DAP" description="CS_DAP Router">
+                        <subpath id="subpath_0">
+                            <cpu XML_version="1.2" id="CORTEX_M0P" HW_revision="1.0" isa="CORTEX_M0P" description="Cortex M0+ CPU">
+                                <property id="Target Interface Type" Type="choicelist" Value="1"/>
+                            </cpu>
+                        </subpath>
+                    </router>
+                </device>
             </platform>
         </connection>
     </configuration>
